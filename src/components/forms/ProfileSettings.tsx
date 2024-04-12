@@ -23,6 +23,8 @@ const ProfileSettings = () => {
 
   const { currentUser } = useCurrentUser();
 
+  //const[removeProfilePicture,setRemoveProfilePicture]=useState(false);
+
   const [profilePicture, setProfilePicture] = useState<ImageType>({
     file: null,
     preview: null,
@@ -50,8 +52,17 @@ const ProfileSettings = () => {
   const name=watch("name");
   const about=watch("about");
 
+  const removeProfilePicture=useCallback(()=>{
+    console.log("rm pp");
+    const formData = new FormData();
+    formData.append("removeProfilePicture",JSON.stringify(true));
+    mutate(formData);
+    console.log("pp rmvd");
+  },[mutate]);
+
   const onSubmit=useCallback((data:FieldValues)=>{
-    console.log("onSubmit data",data);
+    const a=4/0;
+    console.log("onSubmit data",data,a);
       const formData = new FormData();
         if (profilePicture?.file) {
           formData.append("profilePicture", profilePicture.file);
@@ -72,9 +83,9 @@ const ProfileSettings = () => {
 
   return (
     <form
-      className="flex flex-col items-center gap-2"
       onSubmit={handleSubmit(onSubmit)}
     >
+      <fieldset className="flex flex-col items-center gap-2 w-full" disabled={isLoading}>
       <div className="relative" title="Max image allowed is 1MB">
         <Image
           src={
@@ -101,8 +112,8 @@ const ProfileSettings = () => {
                   Browse
                 </ImageInputButton>
               </div>
-              <div className="text-sm font-light text-gray-600 p-0.5 rounded-sm cursor-pointer transition-colors hover:bg-zinc-100">
-                Remove
+              <div className="text-sm font-light text-gray-600 p-0.5 rounded-sm cursor-pointer transition-colors hover:bg-zinc-100" onClick={()=>removeProfilePicture()}>
+                {isLoading ? "Removing..":"Remove"}
               </div>
             </PopoverContent>
           </Popover>
@@ -137,6 +148,7 @@ const ProfileSettings = () => {
           loadingLabel="Saving"
         />
       </div>
+      </fieldset>
     </form>
   );
 };

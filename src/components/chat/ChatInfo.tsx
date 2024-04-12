@@ -2,7 +2,6 @@ import { useMemo } from "react";
 import { Button } from "../ui/button";
 import { IoIosCall } from "react-icons/io";
 import { FcVideoCall } from "react-icons/fc";
-import { MdBlock } from "react-icons/md";
 import Image from "@/components/miscellaneous//Image";
 import { Chat, User } from "@/types";
 import {format} from "date-fns";
@@ -27,7 +26,7 @@ const ChatInfo = ({chat }: ChatInfoProps) => {
          src={otherUser.profilePicture}
          fallback={USER_FALLBACK}
          alt={otherUser.name}
-         className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] rounded-full shadow-sm"
+         className="w-[70px] h-[70px] md:w-[80px] md:h-[80px] rounded-full border object-scale-down"
        />
        <h4>{otherUser.name}</h4>
        <small> pinging since {joinedDate}</small>
@@ -54,9 +53,9 @@ const ChatInfo = ({chat }: ChatInfoProps) => {
      </ScrollArea>
     </div> */}
     <div className="row-span-1 flex gap-2">
-     <Button variant="outline" className="flex-grow gap-2 text-red-500">
+     {/* <Button variant="outline" className="flex-grow gap-2 text-red-500">
          <MdBlock/>
-         Block</Button>
+         Block</Button> */}
      <Button variant="destructive" className="flex-grow">Delete</Button>
 </div>
  </div>

@@ -3,7 +3,7 @@ import { lazy, Suspense } from "react";
 import { useAuthContext } from "./context/AuthContext";
 import FallbackPage from "@/pages/FallbackPage";
 
-const Home = lazy(() => import("@/pages/Home"));
+//const Home = lazy(() => import("@/pages/Home"));
 const Login = lazy(() => import("@/pages/Login"));
 const Signup = lazy(() => import("@/pages/Signup"));
 const Chat= lazy(() => import("@/pages/Chat"));

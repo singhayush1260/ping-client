@@ -81,6 +81,7 @@ const Map = ({ currentUser, users }: MapProps) => {
           key={user._id}
           position={userLocationCenter}
           icon={customIcon}
+          
         >
           <Popup>
             <MapPopupCard user={user}/>

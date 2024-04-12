@@ -1,10 +1,11 @@
 import CountrySelect from "../miscellaneous/CountrySelect";
 import { useCallback, useState } from "react";
-import Map from "../map/Map";
 import LoaderButton from "@/components/miscellaneous/LoaderButton";
 import { useMutation, useQueryClient } from "react-query";
 import { updateUser } from "@/api-client/user-api";
 import useCurrentUser from "@/hooks/useCurrentUser";
+//const Map=lazy(()=>import("@/components/map/Map"));
+import Map from "@/components/map/Map"
 
 export type Location = {
   name: string;

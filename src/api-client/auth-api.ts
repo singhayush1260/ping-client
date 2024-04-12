@@ -1,6 +1,7 @@
 import { SignUpFormData } from "@/pages/Signup";
 import { LoginFormData } from "@/pages/Login";
 
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export const validateToken = async () => {
@@ -56,5 +57,23 @@ export const logout = async () => {
 
   if (!response.ok) {
     throw new Error("Error during sign out");
+  }
+};
+
+
+export const changePassword = async (formData:{currentPassword:string,newPassword:string}) => {
+  const response = await fetch(`${API_BASE_URL}/api/auth/change-password`, {
+    method: "PATCH",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(formData),
+  });
+
+  const responseBody = await response.json();
+
+  if (!response.ok) {
+    throw new Error(responseBody.message);
   }
 };

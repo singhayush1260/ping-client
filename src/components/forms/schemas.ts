@@ -43,6 +43,15 @@ export const LoginSchema = z.discriminatedUnion("loginAsGuest", [
   }),
 ]);
 
+export const UpdatePasswordSchema=z.object({
+  currentPassword: z.string().min(1, {
+    message: "Can not be empty",
+  }),
+  newPassword: z.string().min(6, {
+    message: "Minimum 6 characters required",
+  }),
+})
+
 export const SignUpSchema = z.object({
   email: z.string().email({
     message: "Email is required",

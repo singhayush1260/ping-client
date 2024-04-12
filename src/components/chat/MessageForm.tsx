@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 import { BsEmojiSmile } from "react-icons/bs";
 import { IoMdSend } from "react-icons/io";
@@ -18,6 +18,7 @@ import {
 import SendImage from "./SendImage";
 import { sendMessage } from "@/api-client/message-api";
 import { useTheme } from "../theme/ThemeProvider";
+import { socket } from "./MessageArea";
 
 interface MessageFormProps {
   chatId: string;
@@ -44,7 +45,7 @@ const MessageForm = ({ chatId }: MessageFormProps) => {
       console.log("data on success", data);
       await queryClient.invalidateQueries("getAllMessages");
       await queryClient.invalidateQueries("getAllChats");
-      //socket.emit("new message", data);
+      socket.emit("new message", data);
     },
   });
 

@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import Image from "./Image";
 import LoaderButton from "./LoaderButton";
 import USER_FALLBACK from "@/assets/avatar_placeholder.jpg"
+import { User } from "@/types";
 
 interface ProfileCardProps {
   name: string;
@@ -10,6 +11,7 @@ interface ProfileCardProps {
   profilePicture:string|undefined;
   about:string|undefined;
   location:{name:string,center:number[]}|undefined;
+  connections:User[];
   joinedAt: Date;
   actionLabelOne?: string;
   actionOne?: () => void;
@@ -27,6 +29,7 @@ const ProfileCard = ({
   profilePicture,
   about,
   location,
+  connections,
   joinedAt,
   actionLabelOne,
   actionOne,
@@ -62,6 +65,11 @@ const ProfileCard = ({
             Pinging since {formattedJoinedDate}
           </div>
         )}
+        {
+          connections?.length >0 && <div className="text-xs p-0.5 bg-zinc-50 rounded-md">
+           {connections.length} connections
+        </div>
+        }
        {
         location?.name &&  <div className="text-sm font-medium">
         From {location?.name}

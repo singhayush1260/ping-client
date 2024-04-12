@@ -3,9 +3,11 @@ import ChatHeader from "@/components/chat/ChatHeader";
 import MessageArea from "@/components/chat/MessageArea";
 import MessageForm from "@/components/chat/MessageForm";
 import { cn } from "@/lib/utils";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useChatQuery from "@/hooks/useChatQuery";
 import ChatSkeletonLoader from "@/components/chat/ChatSkeletonLoader";
+import { BiError } from "react-icons/bi";
+import { buttonVariants } from "@/components/ui/button";
 
 const Chat = () => {
   const params = useParams();
@@ -32,11 +34,16 @@ const Chat = () => {
       {error && (
         <main
           className={cn(
-            "w-full md:w-[70%] md:flex items-center justify-center",
-            chatId ? "block" : "hidden"
+            "w-full h-full md:w-[70%] flex items-center justify-center",
+            chatId ? "flex" : "hidden"
           )}
         >
-          <span className="text-lg">No chat found.</span>
+          <div className=" py-4 px-8  rounded-sm flex flex-col items-center gap-1">
+            <BiError className="w-10 h-10 text-red-500"/>
+            <h1 className="font-medium">404 Error</h1>
+            <h1 className="font-light text-gray-700 mb-5">Sorry, chat not found.</h1>
+            <Link to="/chats" className={buttonVariants({variant:"default"})}>Back to chats</Link>
+          </div>
         </main>
       )}
       {!chat && !error && <ChatSkeletonLoader chatId={chatId} />}

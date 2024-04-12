@@ -44,19 +44,6 @@ html,body,:root{
   z-index:0 !important;
 }
 
-.userMarker{
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border:1px solid blue;
-}
-.userMarkerIcon{
-  height: 40px;
-  width: 40px;
-  max-width: 40px;
-  max-height: 40px;
-  border-radius: 50%;
-}
 
 
 @layer base {

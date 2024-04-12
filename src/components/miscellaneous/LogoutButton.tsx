@@ -13,7 +13,7 @@ const LogoutButton = ({ children }: { children: React.ReactNode }) => {
 
 
 
-  const { mutate, isLoading } = useMutation(logout, {
+  const { mutate } = useMutation(logout, {
     onSuccess: async () => {
       await queryClient.invalidateQueries("validateToken");
       // removeCurrentUser();

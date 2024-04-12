@@ -4,7 +4,6 @@ import useConnectionMutation from "@/hooks/useConnectionMutation";
 import { getConnectionRequests } from "@/api-client/con-req-api";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { cn } from "@/lib/utils";
-import { buttonVariants } from "../ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
@@ -24,16 +23,16 @@ const ConnectionRequest = ({ trigger }: ConnectionRequestProps) => {
 
   const [requestType, setRequestType] = useState<"received" | "sent" | "">("received");
 
-  const { data, isLoading, error, refetch } = useQuery(["getConnectionRequests", requestType], () => getConnectionRequests(requestType), {
+  const { data, isLoading } = useQuery(["getConnectionRequests", requestType], () => getConnectionRequests(requestType), {
     enabled: true
   });
 
 
-  const { performAction: acceptRequest, loading: accepting, success: accepted, error: acceptingError } = useConnectionMutation({
+  const { performAction: acceptRequest, loading: accepting, success: accepted } = useConnectionMutation({
     action: "accept",
   });
 
-  const { performAction: declineRequest, loading: declining, success: declined, error: decliningError } = useConnectionMutation({
+  const { performAction: declineRequest, loading: declining, success: declined } = useConnectionMutation({
     action: "decline",
   });
 
@@ -74,28 +73,28 @@ const ConnectionRequest = ({ trigger }: ConnectionRequestProps) => {
                     {/* @ts-ignore */}
                     {formatDistanceToNow(new Date(conReq?.createdAt), { addSuffix: true })}
                   </small>
-                 { !accepting && !declining && <small className={cn(conReq?.status === "accepted" ? "text-green-400" : "text-red-500")}>{conReq?.status.charAt(0).toUpperCase() + conReq.status.slice(1)}</small>}
+                 { !accepting && !declining && !accepted && <small className={cn(conReq?.status === "accepted" ? "text-green-400" : "text-red-500")}>{conReq?.status}</small>}
                   {accepting && !declining && <small className="font-semibold text-blue-700">Accepting...</small>}
-                  {/* {accepted && <small className="font-semibold text-green-400">Accepted</small>} */}
-                  {declining && !accepting && <small className="font-semibold text-blue-700">Declining...</small>}
-                  {/* {declined && <small className="font-semibold text-red-400">Declined</small>} */}
+                  {accepted && <small className="font-semibold text-green-400">Accepted</small>}
+                  {declining && !accepting && !declined && <small className="font-semibold text-blue-700">Declining...</small>}
+                  {declined && <small className="font-semibold text-red-400">Declined</small>}
                 </div>
               </div>
 
               {
-                conReq.status === "pending" && requestType === "received" && <DropdownMenu>
+                conReq.status === "Pending" && requestType === "received" && <DropdownMenu>
                   <DropdownMenuTrigger>
                     <BsThreeDotsVertical />
                   </DropdownMenuTrigger>
                   <DropdownMenuContent className="flex flex-col gap-2 mr-[100px]">
                     <DropdownMenuItem
-                      className={buttonVariants({ variant: "default" })}
+                      
                       onClick={() => acceptRequest(conReq)}
                     >
                       Accept
                     </DropdownMenuItem>
                     <DropdownMenuItem
-                      className={buttonVariants({ variant: "destructive" })}
+                      
                       onClick={() => declineRequest(conReq)}
                     >
                       Decline

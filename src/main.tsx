@@ -7,8 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { AuthContextProvider } from "./context/AuthContext.tsx";
 import { Toaster } from "@/components/ui/toaster";
-// import { MapContextProvider } from "./context/MapContext.tsx";
 import { SidebarContextProvider } from "./context/SidebarContext.tsx";
+import ErrorBoundary from "./components/error-boundary/ErrorBoundary.tsx";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -19,7 +19,8 @@ const queryClient = new QueryClient({
 });
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <BrowserRouter>
+   <ErrorBoundary>
+   <BrowserRouter>
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
           <AuthContextProvider>
@@ -31,5 +32,6 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
         </ThemeProvider>
       </QueryClientProvider>
     </BrowserRouter>
+   </ErrorBoundary>
   </React.StrictMode>
 );

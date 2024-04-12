@@ -1,3 +1,5 @@
+import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import UserMenu from "@/components/miscellaneous/UserMenu";
@@ -7,7 +9,6 @@ import UsersTab from "./UsersTab";
 import CallList from "./CallList";
 import { PiHandsClappingDuotone } from "react-icons/pi";
 
-
 export interface SidebarProps {
   defaultValue?: string;
   tabTriggers?: { label: string; value: string }[];
@@ -15,22 +16,39 @@ export interface SidebarProps {
 }
 
 const Sidebar = ({ defaultValue }: SidebarProps) => {
+  const { currentUser } = useCurrentUser();
 
+  const navigate = useNavigate();
 
-const{currentUser}=useCurrentUser();  
-
+  const defaultVal = useMemo(() => {
+    const pathName = window.location.pathname;
+    switch (pathName) {
+      case "/":
+        return "users";
+      case "/chats":
+        return "chats";
+      default:
+        return defaultValue;
+    }
+  }, [window.location]);
 
   return (
     <aside className="md:block h-full border-r relative">
       <div className="flex justify-between items-center px-5 py-4 border-b">
         <Logo title="PING" icon={<PiHandsClappingDuotone size={28} />} />
-        <UserMenu name={currentUser?.name} imageUrl={currentUser?.profilePicture} />
-        {/* <AccountMenu className="mr-10"/> */}
+        <UserMenu
+          name={currentUser?.name}
+          imageUrl={currentUser?.profilePicture}
+        />
       </div>
       <div className="p-3">
-        <Tabs defaultValue={defaultValue} className="w-full">
+        <Tabs defaultValue={defaultVal} className="w-full">
           <TabsList className="w-full mb-2">
-            <TabsTrigger value="users" className="w-full">
+            <TabsTrigger
+              value="users"
+              className="w-full"
+              onClick={() => navigate("/")}
+            >
               Users
             </TabsTrigger>
             <TabsTrigger value="chats" className="w-full">
@@ -48,7 +66,7 @@ const{currentUser}=useCurrentUser();
               <ChatList />
             </TabsContent>
             <TabsContent value="calls">
-             <CallList/>
+              <CallList />
             </TabsContent>
           </div>
         </Tabs>

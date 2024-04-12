@@ -11,6 +11,8 @@ export const getCurrentUser = async ()=> {
     return response.json(); 
   }; 
 
+  
+
   export const getUserById=async(userId:string)=>{
     
     const response = await fetch(`${API_BASE_URL}/api/user/${userId}`, {

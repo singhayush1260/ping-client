@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { getAllMessages } from "@/api-client/message-api";
+import { io } from 'socket.io-client';
 import { Message } from "@/types";
 import { TiMessages } from "react-icons/ti";
 import MessageItem from "./MessageItem";
 
 const API_URL = import.meta.env.VITE_API_BASE_URL;
+export let socket:any;
 
 interface MessageAreaProps {
   chatId: string;
@@ -27,7 +29,6 @@ const MessageArea = ({ chatId }: MessageAreaProps) => {
     {
       enabled: false,
       onSuccess: (data) => {
-        console.log("message area success");
         scrollToBottom();
         setMessages(data);
       },
@@ -35,10 +36,26 @@ const MessageArea = ({ chatId }: MessageAreaProps) => {
   );
 
   useEffect(() => {
-    // socket = io(API_URL);
-    // socket.emit("join room", chatId);
+    socket = io(API_URL);
+    socket.emit("join room", chatId);
     refetch();
   }, []);
+
+  useEffect(() => {
+    socket.on("message", (data: any) => {
+      const isMessageExists = messages.some((message) => message._id === data._id);
+      if (!isMessageExists) {
+        setMessages(prevMessages => [...prevMessages, data]);
+      }
+    });
+    return () => {
+      socket.off("message");
+    };
+  }, [messages]); 
+  
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   if (messages.length == 0) {
     return (
@@ -64,6 +81,7 @@ const MessageArea = ({ chatId }: MessageAreaProps) => {
             <MessageItem
               key={message._id}
               message={message}
+              previousMessage={messages[index!==0 ? index-1: 0]}
               lastMessage={index === messages.length - 1}
             />
           );

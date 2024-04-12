@@ -1,15 +1,20 @@
+import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import CreateGroup from "../forms/CreateGroup";
 //import DirectMessage from "../forms/DirectMessage";
 import Modal from "./Modal";
+
 
 interface CreateChatProps {
   trigger?: React.ReactNode;
 }
 
 const CreateChat = ({ trigger }: CreateChatProps) => {
+
+const[open,setOpen]=useState(false);
+
   return (
-    <Modal trigger={trigger}>
+    <Modal trigger={trigger} open={open} setOpen={setOpen}>
       <Tabs defaultValue="group" className="w-full">
         <TabsList className="w-full my-3">
           {/* <TabsTrigger value="direct message" className="w-full">
@@ -23,7 +28,7 @@ const CreateChat = ({ trigger }: CreateChatProps) => {
           <DirectMessage />
         </TabsContent> */}
         <TabsContent value="group">
-          <CreateGroup />
+          <CreateGroup setOpen={setOpen}/>
         </TabsContent>
       </Tabs>
     </Modal>

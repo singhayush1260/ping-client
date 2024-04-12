@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import Modal from "../modals/Modal";
 import ImageInputButton, {
   ImageType,
@@ -92,6 +92,7 @@ const SendImage = ({ trigger, chatId = "", onSent }: SendImageProps) => {
             disabled={isLoading}
           />
           <LoaderButton
+          variant="secondary"
             label={
               <IoMdSend size={30} className="text-gray-600 cursor-pointer" />
             }
