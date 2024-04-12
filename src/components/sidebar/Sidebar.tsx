@@ -35,7 +35,7 @@ const Sidebar = ({ defaultValue }: SidebarProps) => {
   return (
     <aside className="md:block h-full border-r relative">
       <div className="flex justify-between items-center px-5 py-4 border-b">
-        <Logo title="PING" icon={<PiHandsClappingDuotone size={28} />} />
+        <Logo title="PINNG" icon={<PiHandsClappingDuotone size={28} />} />
         <UserMenu
           name={currentUser?.name}
           imageUrl={currentUser?.profilePicture}

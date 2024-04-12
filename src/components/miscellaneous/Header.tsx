@@ -11,7 +11,7 @@ const Header = ({ label }: HeaderProps) => {
     <div className="w-full flex flex-col gap-y-4 items-center justify-center">
       <h1 className={cn("text-3xl font-semibold flex items-center gap-x-1 text-blue-700")}> 
       <PiHandsClappingDuotone className="w-7 h-7 animate-pulse"/>
-      Ping</h1>
+      Pinng</h1>
       <p className="text-muted-foreground text-sm">{label}</p>
     </div>
   );
