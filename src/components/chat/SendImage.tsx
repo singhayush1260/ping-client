@@ -1,5 +1,5 @@
 import {  useState } from "react";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation } from "react-query";
 import Modal from "../modals/Modal";
 import ImageInputButton, {
   ImageType,
@@ -21,7 +21,6 @@ interface SendImageProps {
 
 const SendImage = ({ trigger, chatId = "", onSent }: SendImageProps) => {
 
-  const queryClient = useQueryClient();
 
   const [image, setImage] = useState<ImageType>({
     file: null,
