@@ -54,7 +54,6 @@ const MessageForm = ({ chatId }: MessageFormProps) => {
   };
 
   const onImageSent=()=>{
-    console.log("on image sent running")
     queryClient.invalidateQueries("getAllMessages");
   }
 
@@ -70,7 +69,7 @@ const MessageForm = ({ chatId }: MessageFormProps) => {
         className="w-full flex-col md:flex-row items-center justify-between gap-2"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-2">
           <SendImage chatId={chatId} trigger={ <CiImageOn className="h-8 w-8 text-blue-600 cursor-pointer" />} onSent={onImageSent}/>
           <Popover
             open={showEmojiPicker}
@@ -79,7 +78,7 @@ const MessageForm = ({ chatId }: MessageFormProps) => {
             <PopoverTrigger>
               <BsEmojiSmile
                 className="h-5 w-5 text-blue-600 cursor-pointer"
-                onClick={() => setShowEmojiPicker(!showEmojiPicker)}
+               
               />
             </PopoverTrigger>
             <PopoverContent className="w-[380px] grid place-items-center">

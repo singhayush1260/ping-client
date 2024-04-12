@@ -41,6 +41,9 @@ const Login = () => {
       await queryClient.invalidateQueries("validateToken");
       navigate("/chats");
     },
+    onError:()=>{
+      console.log("error while logging",error)
+    }
   });
   const onSubmit = form.handleSubmit((data) => {
     console.log("login form data", data);

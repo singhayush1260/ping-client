@@ -2,21 +2,16 @@ import { logout } from "@/api-client/auth-api";
 import { useMutation, useQueryClient } from "react-query";
 import { useToast } from "../ui/use-toast";
 
-// import useCurrentUser from "@/hooks/useCurrentUser";
-
 const LogoutButton = ({ children }: { children: React.ReactNode }) => {
+
+ 
   const queryClient = useQueryClient();
 
-  // const { removeCurrentUser } = useCurrentUser();
-
   const { toast } = useToast();
-
-
 
   const { mutate } = useMutation(logout, {
     onSuccess: async () => {
       await queryClient.invalidateQueries("validateToken");
-      // removeCurrentUser();
     },
     onError: () => {
       toast({
@@ -28,6 +23,7 @@ const LogoutButton = ({ children }: { children: React.ReactNode }) => {
   });
 
   const handleClick = () => {
+    console.log("logout button clicked")
     mutate();
   };
 

@@ -17,7 +17,7 @@ const ChatHeader = ({ chat }: ChatHeaderProps) => {
 const navigate = useNavigate();
   
   return (
-    <div className="relative h-[12%] w-full flex justify-between items-center px-2 md:px-5 py-7 md:py-9 border-b">
+    <div className="relative h-[12%] w-full flex justify-between items-center px-2 md:px-5 py-3 md:py-9 border-b">
       <div className="flex items-center">
         <MdKeyboardArrowLeft
           size={23}

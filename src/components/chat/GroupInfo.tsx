@@ -41,6 +41,7 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 interface Member {
   _id: string;
   name: string;
+  profilePicture:string|undefined;
   isAdmin?: boolean;
 }
 
@@ -69,6 +70,7 @@ const GroupInfo = ({ chat }: GroupInfoProps) => {
       return {
         _id: user._id,
         name: user.name,
+        profilePicture:user.profilePicture
       };
     });
   }, [users, chat]);
@@ -195,7 +197,7 @@ const GroupInfo = ({ chat }: GroupInfoProps) => {
     [isEditingName]
   );
   return (
-    <div className="h-[350px] md:h-full pb-5 md:pb-0 px-4 md:px-0  grid grid-rows-10 gap-2">
+    <div className="h-[400px] md:h-full pb-5 md:pb-0 px-4 md:px-0  grid grid-rows-10 gap-2">
       {/* {nameError && (
         <span className="text-sm text-red-500 font-light">
           {nameError?.message}
@@ -351,7 +353,7 @@ const GroupInfo = ({ chat }: GroupInfoProps) => {
                       className="flex items-center justify-between mb-2 p-2 cursor-pointer rounded-sm hover:bg-gray-50 hover:dark:bg-blue-300"
                     >
                       <div className="flex items-center gap-2">
-                        <UserAvatar imageUrl="" fallback={member.name} />
+                        <UserAvatar imageUrl={member?.profilePicture} fallback={member.name} />
                         <Label>{member._id===currentUser._id ? "You": member.name}</Label>
                        { member._id===admin?._id && <small className="bg-green-200 text-green-700 font-light text-xs py-0.5 px-1 rounded-md">admin</small>}
                       </div>

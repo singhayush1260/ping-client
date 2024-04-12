@@ -1,4 +1,5 @@
 import {  useState } from "react";
+import { useMutation, useQueryClient } from "react-query";
 import Modal from "../modals/Modal";
 import ImageInputButton, {
   ImageType,
@@ -8,10 +9,10 @@ import Image from "@/components/miscellaneous/Image";
 import { Input } from "../ui/input";
 import { IoMdSend } from "react-icons/io";
 import { useForm } from "react-hook-form";
-import { useMutation } from "react-query";
 import { sendImage } from "@/api-client/message-api";
 import IMAGE_FALLBACK from "@/assets/image_fallback.png";
 import LoaderButton from "../miscellaneous/LoaderButton";
+import { socket } from "./MessageArea";
 interface SendImageProps {
   trigger: React.ReactNode;
   chatId?: string;
@@ -19,6 +20,9 @@ interface SendImageProps {
 }
 
 const SendImage = ({ trigger, chatId = "", onSent }: SendImageProps) => {
+
+  const queryClient = useQueryClient();
+
   const [image, setImage] = useState<ImageType>({
     file: null,
     preview: null,
@@ -29,9 +33,10 @@ const SendImage = ({ trigger, chatId = "", onSent }: SendImageProps) => {
   const { register, handleSubmit } = useForm();
 
   const { mutate, isLoading, error } = useMutation(sendImage, {
-    onSuccess: async () => {
+    onSuccess: async (sentImage) => {
       await onSent();
       setOpenModal(!openModal);
+      socket.emit("new message",sentImage);
     },
   });
 

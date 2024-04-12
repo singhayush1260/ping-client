@@ -20,7 +20,7 @@ import {
         <DialogTrigger asChild>
           {trigger ? trigger : <span>Open Modal</span>}
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[400px] min-h-[250px]  flex flex-col">
+        <DialogContent className="w-[350px] md:w-[400px] rounded-md min-h-[250px]  flex flex-col">
           <DialogHeader className=" ">
             <DialogTitle className="text-center">{title}</DialogTitle>
           </DialogHeader>

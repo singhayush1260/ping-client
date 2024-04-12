@@ -16,7 +16,6 @@ const UsersMap = () => {
     let users: User[] | undefined = [];
     if (filter.filterType === "ALL USERS") {
       users = otherUsers;
-      console.log("inside all users filter");
     } else if (filter.filterType === "CONNECTIONS") {
       users = currentUser?.connections;
     } else if (filter.filterType === "ACTIVE CONNECTIONS") {
