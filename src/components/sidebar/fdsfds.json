@@ -1,0 +1,323 @@
+[
+    {
+        "_id": "66198dcdd468c8ba848654ff",
+        "body": "Fhh",
+        "chat": {
+            "_id": "66198dc1d468c8ba848654ee",
+            "name": "sender",
+            "isGroup": false,
+            "thumbnail": "",
+            "messages": [
+                "66198dcdd468c8ba848654ff",
+                "66198dd9d468c8ba84865512",
+                "66198df6d468c8ba8486551b",
+                "66198e07d468c8ba84865524",
+                "66199155c5a980db976f5e64",
+                "66199bc29f557ce3726be647",
+                "66199bd29f557ce3726be64d",
+                "66199c16576f547719724389"
+            ],
+            "users": [
+                "66198d78d468c8ba848654ca",
+                "661834ad042323062e9e4af7"
+            ],
+            "createdAt": "2024-04-12T19:38:41.580Z",
+            "updatedAt": "2024-04-12T20:39:50.783Z",
+            "__v": 8,
+            "lastMessage": "66199c16576f547719724389"
+        },
+        "sender": {
+            "_id": "66198d78d468c8ba848654ca",
+            "name": "Sansa Stark",
+            "email": "sansa@stark.com"
+        },
+        "seenIds": [
+            "66198d78d468c8ba848654ca",
+            "661834ad042323062e9e4af7"
+        ],
+        "createdAt": "2024-04-12T19:38:53.954Z",
+        "updatedAt": "2024-04-12T19:39:01.577Z",
+        "__v": 0
+    },
+    {
+        "_id": "66198dd9d468c8ba84865512",
+        "body": "Gds",
+        "chat": {
+            "_id": "66198dc1d468c8ba848654ee",
+            "name": "sender",
+            "isGroup": false,
+            "thumbnail": "",
+            "messages": [
+                "66198dcdd468c8ba848654ff",
+                "66198dd9d468c8ba84865512",
+                "66198df6d468c8ba8486551b",
+                "66198e07d468c8ba84865524",
+                "66199155c5a980db976f5e64",
+                "66199bc29f557ce3726be647",
+                "66199bd29f557ce3726be64d",
+                "66199c16576f547719724389"
+            ],
+            "users": [
+                "66198d78d468c8ba848654ca",
+                "661834ad042323062e9e4af7"
+            ],
+            "createdAt": "2024-04-12T19:38:41.580Z",
+            "updatedAt": "2024-04-12T20:39:50.783Z",
+            "__v": 8,
+            "lastMessage": "66199c16576f547719724389"
+        },
+        "sender": {
+            "_id": "661834ad042323062e9e4af7",
+            "name": "Ayush Singh",
+            "email": "ayush2863@gmail.com"
+        },
+        "seenIds": [
+            "661834ad042323062e9e4af7",
+            "66198d78d468c8ba848654ca"
+        ],
+        "createdAt": "2024-04-12T19:39:05.006Z",
+        "updatedAt": "2024-04-12T19:39:06.203Z",
+        "__v": 0
+    },
+    {
+        "_id": "66198df6d468c8ba8486551b",
+        "body": "😇😆🤣😂",
+        "chat": {
+            "_id": "66198dc1d468c8ba848654ee",
+            "name": "sender",
+            "isGroup": false,
+            "thumbnail": "",
+            "messages": [
+                "66198dcdd468c8ba848654ff",
+                "66198dd9d468c8ba84865512",
+                "66198df6d468c8ba8486551b",
+                "66198e07d468c8ba84865524",
+                "66199155c5a980db976f5e64",
+                "66199bc29f557ce3726be647",
+                "66199bd29f557ce3726be64d",
+                "66199c16576f547719724389"
+            ],
+            "users": [
+                "66198d78d468c8ba848654ca",
+                "661834ad042323062e9e4af7"
+            ],
+            "createdAt": "2024-04-12T19:38:41.580Z",
+            "updatedAt": "2024-04-12T20:39:50.783Z",
+            "__v": 8,
+            "lastMessage": "66199c16576f547719724389"
+        },
+        "sender": {
+            "_id": "66198d78d468c8ba848654ca",
+            "name": "Sansa Stark",
+            "email": "sansa@stark.com"
+        },
+        "seenIds": [
+            "66198d78d468c8ba848654ca",
+            "661834ad042323062e9e4af7"
+        ],
+        "createdAt": "2024-04-12T19:39:34.362Z",
+        "updatedAt": "2024-04-12T19:39:35.526Z",
+        "__v": 0
+    },
+    {
+        "_id": "66198e07d468c8ba84865524",
+        "body": "Captain ",
+        "image": "http://res.cloudinary.com/dgebufhgh/image/upload/v1712950790/qsjn34p6g9wwublvd3ij.jpg",
+        "chat": {
+            "_id": "66198dc1d468c8ba848654ee",
+            "name": "sender",
+            "isGroup": false,
+            "thumbnail": "",
+            "messages": [
+                "66198dcdd468c8ba848654ff",
+                "66198dd9d468c8ba84865512",
+                "66198df6d468c8ba8486551b",
+                "66198e07d468c8ba84865524",
+                "66199155c5a980db976f5e64",
+                "66199bc29f557ce3726be647",
+                "66199bd29f557ce3726be64d",
+                "66199c16576f547719724389"
+            ],
+            "users": [
+                "66198d78d468c8ba848654ca",
+                "661834ad042323062e9e4af7"
+            ],
+            "createdAt": "2024-04-12T19:38:41.580Z",
+            "updatedAt": "2024-04-12T20:39:50.783Z",
+            "__v": 8,
+            "lastMessage": "66199c16576f547719724389"
+        },
+        "sender": {
+            "_id": "661834ad042323062e9e4af7",
+            "name": "Ayush Singh",
+            "email": "ayush2863@gmail.com"
+        },
+        "seenIds": [
+            "661834ad042323062e9e4af7",
+            "66198d78d468c8ba848654ca"
+        ],
+        "createdAt": "2024-04-12T19:39:51.267Z",
+        "updatedAt": "2024-04-12T19:39:53.019Z",
+        "__v": 0
+    },
+    {
+        "_id": "66199155c5a980db976f5e64",
+        "body": "hfh",
+        "chat": {
+            "_id": "66198dc1d468c8ba848654ee",
+            "name": "sender",
+            "isGroup": false,
+            "thumbnail": "",
+            "messages": [
+                "66198dcdd468c8ba848654ff",
+                "66198dd9d468c8ba84865512",
+                "66198df6d468c8ba8486551b",
+                "66198e07d468c8ba84865524",
+                "66199155c5a980db976f5e64",
+                "66199bc29f557ce3726be647",
+                "66199bd29f557ce3726be64d",
+                "66199c16576f547719724389"
+            ],
+            "users": [
+                "66198d78d468c8ba848654ca",
+                "661834ad042323062e9e4af7"
+            ],
+            "createdAt": "2024-04-12T19:38:41.580Z",
+            "updatedAt": "2024-04-12T20:39:50.783Z",
+            "__v": 8,
+            "lastMessage": "66199c16576f547719724389"
+        },
+        "sender": {
+            "_id": "661834ad042323062e9e4af7",
+            "name": "Ayush Singh",
+            "email": "ayush2863@gmail.com"
+        },
+        "seenIds": [
+            "661834ad042323062e9e4af7",
+            "66198d78d468c8ba848654ca"
+        ],
+        "createdAt": "2024-04-12T19:53:57.550Z",
+        "updatedAt": "2024-04-12T20:37:18.595Z",
+        "__v": 0
+    },
+    {
+        "_id": "66199bc29f557ce3726be647",
+        "body": "Gh",
+        "chat": {
+            "_id": "66198dc1d468c8ba848654ee",
+            "name": "sender",
+            "isGroup": false,
+            "thumbnail": "",
+            "messages": [
+                "66198dcdd468c8ba848654ff",
+                "66198dd9d468c8ba84865512",
+                "66198df6d468c8ba8486551b",
+                "66198e07d468c8ba84865524",
+                "66199155c5a980db976f5e64",
+                "66199bc29f557ce3726be647",
+                "66199bd29f557ce3726be64d",
+                "66199c16576f547719724389"
+            ],
+            "users": [
+                "66198d78d468c8ba848654ca",
+                "661834ad042323062e9e4af7"
+            ],
+            "createdAt": "2024-04-12T19:38:41.580Z",
+            "updatedAt": "2024-04-12T20:39:50.783Z",
+            "__v": 8,
+            "lastMessage": "66199c16576f547719724389"
+        },
+        "sender": {
+            "_id": "66198d78d468c8ba848654ca",
+            "name": "Sansa Stark",
+            "email": "sansa@stark.com"
+        },
+        "seenIds": [
+            "66198d78d468c8ba848654ca",
+            "661834ad042323062e9e4af7"
+        ],
+        "createdAt": "2024-04-12T20:38:26.237Z",
+        "updatedAt": "2024-04-12T20:38:35.658Z",
+        "__v": 0
+    },
+    {
+        "_id": "66199bd29f557ce3726be64d",
+        "body": "Fhfygu",
+        "chat": {
+            "_id": "66198dc1d468c8ba848654ee",
+            "name": "sender",
+            "isGroup": false,
+            "thumbnail": "",
+            "messages": [
+                "66198dcdd468c8ba848654ff",
+                "66198dd9d468c8ba84865512",
+                "66198df6d468c8ba8486551b",
+                "66198e07d468c8ba84865524",
+                "66199155c5a980db976f5e64",
+                "66199bc29f557ce3726be647",
+                "66199bd29f557ce3726be64d",
+                "66199c16576f547719724389"
+            ],
+            "users": [
+                "66198d78d468c8ba848654ca",
+                "661834ad042323062e9e4af7"
+            ],
+            "createdAt": "2024-04-12T19:38:41.580Z",
+            "updatedAt": "2024-04-12T20:39:50.783Z",
+            "__v": 8,
+            "lastMessage": "66199c16576f547719724389"
+        },
+        "sender": {
+            "_id": "66198d78d468c8ba848654ca",
+            "name": "Sansa Stark",
+            "email": "sansa@stark.com"
+        },
+        "seenIds": [
+            "66198d78d468c8ba848654ca",
+            "661834ad042323062e9e4af7"
+        ],
+        "createdAt": "2024-04-12T20:38:42.777Z",
+        "updatedAt": "2024-04-12T20:39:43.547Z",
+        "__v": 0
+    },
+    {
+        "_id": "66199c16576f547719724389",
+        "body": "ggi",
+        "chat": {
+            "_id": "66198dc1d468c8ba848654ee",
+            "name": "sender",
+            "isGroup": false,
+            "thumbnail": "",
+            "messages": [
+                "66198dcdd468c8ba848654ff",
+                "66198dd9d468c8ba84865512",
+                "66198df6d468c8ba8486551b",
+                "66198e07d468c8ba84865524",
+                "66199155c5a980db976f5e64",
+                "66199bc29f557ce3726be647",
+                "66199bd29f557ce3726be64d",
+                "66199c16576f547719724389"
+            ],
+            "users": [
+                "66198d78d468c8ba848654ca",
+                "661834ad042323062e9e4af7"
+            ],
+            "createdAt": "2024-04-12T19:38:41.580Z",
+            "updatedAt": "2024-04-12T20:39:50.783Z",
+            "__v": 8,
+            "lastMessage": "66199c16576f547719724389"
+        },
+        "sender": {
+            "_id": "661834ad042323062e9e4af7",
+            "name": "Ayush Singh",
+            "email": "ayush2863@gmail.com"
+        },
+        "seenIds": [
+            "661834ad042323062e9e4af7",
+            "66198d78d468c8ba848654ca"
+        ],
+        "createdAt": "2024-04-12T20:39:50.531Z",
+        "updatedAt": "2024-04-12T20:40:05.298Z",
+        "__v": 0
+    }
+]

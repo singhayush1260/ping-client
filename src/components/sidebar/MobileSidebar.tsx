@@ -11,7 +11,7 @@ const MobileSidebar = () => {
             <CgMenuLeft />
           </Button>
         </SheetTrigger>
-        <SheetContent className="h-full  p-2" side="left">
+        <SheetContent className="h-full w-[90%]  p-2" side="left">
           <Sidebar defaultValue="users" />
         </SheetContent>
       </Sheet>

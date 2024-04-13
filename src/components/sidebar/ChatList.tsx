@@ -19,6 +19,8 @@ const ChatList = () => {
   
   const{getAllChats,chats,isLoadingAllChats,gettingAllChatsError}=useChatQuery();
 
+  //console.log("chats from chat list",chats);
+
    useEffect(()=>{
     getAllChats();
    },[])

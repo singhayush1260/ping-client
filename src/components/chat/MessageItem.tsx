@@ -18,8 +18,8 @@ interface MessageItemProps {
 const MessageItem = ({ message,previousMessage }: MessageItemProps) => {
   const { currentUser } = useCurrentUser();
   const [seenIds, setSeenIds] = useState(message?.seenIds);
-  console.log("previous messgae from message item", previousMessage);
-  console.log("messgae from message item", message);
+  // console.log("previous messgae from message item", previousMessage);
+  // console.log("messgae from message item", message);
   const sender = message.sender;
   const isSent = currentUser?._id === (sender?._id || sender);
   const classes = isSent

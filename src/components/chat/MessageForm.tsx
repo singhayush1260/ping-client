@@ -64,12 +64,12 @@ const MessageForm = ({ chatId }: MessageFormProps) => {
   };
 
   return (
-    <div className="min-h-[12%] w-full px-2 py-1 flex items-center border-t relative">
+    <div className="h-[10%] md:h-[12%] w-full px-2 py-1 flex items-center border-t relative">
       <form
         className="w-full flex-col md:flex-row items-center justify-between gap-2"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 py-2">
           <SendImage chatId={chatId} trigger={ <CiImageOn className="h-8 w-8 text-blue-600 cursor-pointer" />} onSent={onImageSent}/>
           <Popover
             open={showEmojiPicker}

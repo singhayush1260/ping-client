@@ -33,7 +33,7 @@ const Sidebar = ({ defaultValue }: SidebarProps) => {
   }, [window.location]);
 
   return (
-    <aside className="md:block h-full border-r relative">
+    <aside className=" md:block h-full border-r relative">
       <div className="flex justify-between items-center px-5 py-4 border-b">
         <Logo title="PINNG" icon={<PiHandsClappingDuotone size={28} />} />
         <UserMenu

@@ -68,3 +68,18 @@ export const deleteChatById = async (chatId: string) => {
   }
   return response.json();
 };
+
+export const leaveGroup = async (chatId: string) => {
+  const response = await fetch(`${API_BASE_URL}/api/chat/leave-group`, {
+    method: "PUT",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ chatId }),
+  });
+  if (!response.ok) {
+    throw new Error("Error leaving group");
+  }
+  return response.json();
+};

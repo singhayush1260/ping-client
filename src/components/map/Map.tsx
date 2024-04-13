@@ -6,6 +6,8 @@ import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import { User } from "@/types";
 import MapPopupCard from "./MapPopupCard";
+import Modal from "../modals/Modal";
+import { Button } from "../ui/button";
 
 // @ts-ignore
 delete L.Icon.Default.prototype._getIconUrl;
@@ -81,11 +83,12 @@ const Map = ({ currentUser, users }: MapProps) => {
           key={user._id}
           position={userLocationCenter}
           icon={customIcon}
-          
         >
           <Popup>
-            <MapPopupCard user={user}/>
+           <h1 className="mx-auto">{user.name}</h1>
+          <Modal trigger={<Button>View Profile</Button>}><MapPopupCard user={user}/></Modal>
           </Popup>
+          
         </Marker>
       );
     });
@@ -100,7 +103,7 @@ const Map = ({ currentUser, users }: MapProps) => {
       zoomControl={false} // Disable default zoom control
       className="h-full rounded-lg"
     >
-      <TileLayer url={url} attribution={attribution} />
+      <TileLayer url={url} attribution={attribution} /> 
       {/* @ts-ignore */}
       <ZoomControl position={zoomControlOptions.position} />
       {body}

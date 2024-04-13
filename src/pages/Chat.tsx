@@ -14,6 +14,8 @@ const Chat = () => {
   const chatId = params?.chatId ? params?.chatId : "";
   const { chat, gettingChatByIdError: error } = useChatQuery(chatId);
 
+  console.log("chat from chatId",chat);
+
   return (
     <div className="h-full flex">
       <div className={cn("w-[30%] md:block", chatId ? "hidden" : "block")}>

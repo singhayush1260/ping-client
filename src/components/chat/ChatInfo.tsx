@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { Button } from "../ui/button";
 import { IoIosCall } from "react-icons/io";
 import { FcVideoCall } from "react-icons/fc";
@@ -6,6 +6,9 @@ import Image from "@/components/miscellaneous//Image";
 import { Chat, User } from "@/types";
 import {format} from "date-fns";
 import USER_FALLBACK from "@/assets/avatar_placeholder.jpg"
+import useChatMutate from "@/hooks/useChatMutate";
+import { useNavigate } from "react-router-dom";
+import AlertDialog from "../miscellaneous/AlertDialog";
 
 interface ChatInfoProps {
   chat: Chat;
@@ -13,11 +16,26 @@ interface ChatInfoProps {
 
 const ChatInfo = ({chat }: ChatInfoProps) => {
  const { users } = chat;
+ console.log("chat from caht info",chat)
  const otherUser:User=users[0];
+
+ const navigate=useNavigate();
+
+ const { mutateFunction: deleteChatById,isLoading:deletingChat} = useChatMutate({
+  action: "delete",
+  onSuccess: () => {
+    console.log("chat deleted success");
+    navigate(`/chats`);
+  },
+});
  
  const joinedDate=useMemo(()=>{
   return format(new Date(otherUser.createdAt),"PP");
  },[otherUser.createdAt,format]);
+
+ const handleChatDeletion = useCallback(() => {
+  deleteChatById(chat._id);
+}, [deleteChatById, chat._id]);
 
   return (
     <div className="h-[350px] md:h-full pb-5 md:pb-0 px-4 md:px-0 pt-10 md:pt-0  grid grid-rows-10 gap-2">
@@ -56,7 +74,16 @@ const ChatInfo = ({chat }: ChatInfoProps) => {
      {/* <Button variant="outline" className="flex-grow gap-2 text-red-500">
          <MdBlock/>
          Block</Button> */}
-     <Button variant="destructive" className="flex-grow">Delete</Button>
+      <AlertDialog
+          isDistructiveAction
+          cancelButtonAction={() => {}}
+          continueButtonAction={handleChatDeletion}
+          alertDiscription="This will permanently delete all your group chat data from our servers."
+        >
+          <Button variant="destructive" className="flex-grow">
+            Delete
+          </Button>
+        </AlertDialog>
 </div>
  </div>
   )

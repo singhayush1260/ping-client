@@ -1,10 +1,11 @@
-import { createChat as createChatApi, deleteChatById as deleteChatByIdApi } from "@/api-client/chat-api";
+import { createChat as createChatApi, deleteChatById as deleteChatByIdApi,leaveGroup as leaveGroupApi } from "@/api-client/chat-api";
 import { useMutation } from "react-query";
 
 type ActionType =
   | "create"
   | "create-group"
   | "delete"
+  | "leave-group"
 
 interface UseChatMutate<Action extends ActionType> {
   onSuccess?: (data: any) => void;
@@ -40,6 +41,10 @@ const useChatMutate = <Action extends ActionType>({
     console.log("chat id from delete chat",chatId)
     return chatId;
   };
+  const leaveGroup = (chatId: string) => {
+    console.log("chat id from leave group",chatId)
+    return chatId;
+  };
   let apiFunction:any;
   let mutateFunction: any;
   switch (action) {
@@ -54,6 +59,10 @@ const useChatMutate = <Action extends ActionType>({
     case "delete":
       apiFunction=deleteChatByIdApi
       mutateFunction = deleteChat;
+      break;
+    case "leave-group":
+      apiFunction=leaveGroupApi
+      mutateFunction=leaveGroup
       break;
     default:
       throw new Error(`Invalid action type: ${action}`);

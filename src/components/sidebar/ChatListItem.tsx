@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useCallback, useMemo } from "react";
-import { cn } from "@/lib/utils";
+import { cn, generateDeviderLabel } from "@/lib/utils";
 import { Chat } from "@/types";
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import UserAvatar from "@/components/miscellaneous/UserAvatar";
@@ -13,13 +13,18 @@ interface ChatListItemProps{
 const ChatListItem = ({ chat,currentlyOpened }: ChatListItemProps) => {
   const navigate = useNavigate();
 
+  //console.log("last message",chat.lastMessage);
+
   const handleClick = useCallback(async () => {
     navigate(`/chat/${chat._id}`);
   }, [chat, navigate]);
 
-  const seen = false;
+  const seen = !false;
 
   const lastMessage = useMemo(() => {
+    if(chat?.lastMessage?.image){
+      return "Sent an image"
+    }
     if (chat?.lastMessage?.body) {
       if (chat?.lastMessage?.body.length <= 10) {
         return chat?.lastMessage?.body;
@@ -32,12 +37,22 @@ const ChatListItem = ({ chat,currentlyOpened }: ChatListItemProps) => {
   const lastMessageAt = useMemo(() => {
     if (chat?.lastMessage?.createdAt) {
       //@ts-ignore
-      return formatDistanceToNow(new Date(chat.lastMessage.createdAt), {
-        addSuffix: true,
-      });
+      // return formatDistanceToNow(new Date(chat.lastMessage.createdAt), {
+      //   addSuffix: true,
+      // });
+      return generateDeviderLabel(new Date(chat.lastMessage.createdAt))
     }
     return "";
   }, [chat]);
+
+  // const isSeen = useMemo(() => {
+  //   const lastMessage=chat?.lastMessage;
+  //   if (chat?.isGroup) {
+  //     return lastMessage?.chat?.users?.length === lastMessage?.seenIds?.length;
+  //   }
+  //   return lastMessage?.seenIds?.length === 2;
+  // }, [chat]);
+
 
   return (
     <div
@@ -55,13 +70,13 @@ const ChatListItem = ({ chat,currentlyOpened }: ChatListItemProps) => {
               "text-sm dark:text-gray-300",
               seen
                 ? "text-gray-700"
-                : "font-bold text-blue-700 shadow-sm rounded-sm px-[4px] py-[2px]"
+                : "font-semibold text-blue-700  px-[4px] py-[2px]"
             )}
           >
             {lastMessage}
           </span>
           <small>
-            <time className="text-sm font-light text-gray-600 dark:text-gray-300">
+            <time className="text-xs font-light text-gray-600 dark:text-gray-300">
               {lastMessageAt}
             </time>
           </small>

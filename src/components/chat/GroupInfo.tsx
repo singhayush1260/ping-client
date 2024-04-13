@@ -161,6 +161,13 @@ const GroupInfo = ({ chat }: GroupInfoProps) => {
     toast({title:"Group deleted."})
   },onError:()=>{toast({title:"Something went wrong.",description:"Could not delete the group."})} });
 
+  const {
+    mutateFunction: leaveGroup,
+    isLoading:leavingGroup
+  } = useChatMutate({ action: "leave-group",onSuccess:()=>{
+    navigate("/chats");
+  },onError:()=>{toast({title:"Something went wrong.",description:"Error leaving group."})} });
+
   const notMembers = useMemo(() => {
     return otherUsers
       ?.filter((user) => {
@@ -227,8 +234,8 @@ const GroupInfo = ({ chat }: GroupInfoProps) => {
               >
                 Add Members
               </DropdownMenuItem>}
-              <DropdownMenuItem className="text-xs font-light text-gray-600 cursor-pointer">
-                Leave
+              <DropdownMenuItem className="text-xs font-light text-gray-600 cursor-pointer" onClick={()=>leaveGroup(chat._id)}>
+              {leavingGroup ? <TbLoader2 className="ml-5 animate-spin"/> :"Leave"}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
