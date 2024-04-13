@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { useCallback, useMemo } from "react";
 import { cn, generateDeviderLabel } from "@/lib/utils";
 import { Chat } from "@/types";
-import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import UserAvatar from "@/components/miscellaneous/UserAvatar";
 
 interface ChatListItemProps{

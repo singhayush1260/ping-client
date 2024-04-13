@@ -21,7 +21,7 @@ const ChatInfo = ({chat }: ChatInfoProps) => {
 
  const navigate=useNavigate();
 
- const { mutateFunction: deleteChatById,isLoading:deletingChat} = useChatMutate({
+ const { mutateFunction: deleteChatById} = useChatMutate({
   action: "delete",
   onSuccess: () => {
     console.log("chat deleted success");

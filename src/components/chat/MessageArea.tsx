@@ -111,9 +111,13 @@ const MessageArea = ({ chatId }: MessageAreaProps) => {
           </>
         );
         })}
-
+       {isLoading && (
+  <div className="w-full h-full flex items-center justify-center">
+   <span className="animate-pulse text-lg">Loading your chats..</span>
+ </div>
+)}
       <div ref={latestMessageRef} className="pt-5" />
-    </div>
+    </div> 
   );
 };
 export default MessageArea;
