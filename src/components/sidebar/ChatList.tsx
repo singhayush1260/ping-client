@@ -1,8 +1,8 @@
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import useChatQuery from "@/hooks/useChatQuery";
+import { useQuery } from "react-query";
 import UserListSkeleton from "@/components/miscellaneous/UserListSkeleton";
 import ChatListItem from "./ChatListItem";
+import { getAllChats as getAllChatsApi} from "@/api-client/chat-api";
 import { Chat } from "@/types";
 import { Button } from "../ui/button";
 import { MdOutlineGroupAdd } from "react-icons/md";
@@ -12,18 +12,14 @@ import { BiMessageError } from "react-icons/bi";
 
 
 
+
 const ChatList = () => {
 
   const params = useParams();
   const chatId = params?.chatId ? params?.chatId : "";
-  
-  const{getAllChats,chats,isLoadingAllChats,gettingAllChatsError}=useChatQuery();
 
-  //console.log("chats from chat list",chats);
+  const {data:chats,isLoading:isLoadingAllChats,error:gettingAllChatsError}=useQuery("getAllChats",getAllChatsApi);
 
-   useEffect(()=>{
-    getAllChats();
-   },[])
   if (chats?.length === 0) {
     return (
       <div className="flex justify-center items-center">
@@ -57,7 +53,7 @@ const ChatList = () => {
       )}
       {isLoadingAllChats &&
         Array.from({ length: 4 }).map((_, idx) => {
-          return <UserListSkeleton key={idx.toString()} />;
+          return <UserListSkeleton key={idx.toString()}/>;
         })}
       {!gettingAllChatsError &&
         chats?.map((chat: Chat) => {

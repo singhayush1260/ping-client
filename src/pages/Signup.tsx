@@ -42,7 +42,6 @@ const SignUpForm = () => {
   });  
 
   const onSubmit = form.handleSubmit((data) => {
-    console.log("signup form data",data);
     mutate(data);
   });
 

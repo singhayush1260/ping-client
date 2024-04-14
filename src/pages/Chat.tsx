@@ -4,17 +4,17 @@ import MessageArea from "@/components/chat/MessageArea";
 import MessageForm from "@/components/chat/MessageForm";
 import { cn } from "@/lib/utils";
 import { Link, useParams } from "react-router-dom";
-import useChatQuery from "@/hooks/useChatQuery";
 import ChatSkeletonLoader from "@/components/chat/ChatSkeletonLoader";
 import { BiError } from "react-icons/bi";
 import { buttonVariants } from "@/components/ui/button";
+import { useQuery } from "react-query";
+import { getChatById as getChatByIdApi } from "@/api-client/chat-api";
 
 const Chat = () => {
   const params = useParams();
   const chatId = params?.chatId ? params?.chatId : "";
-  const { chat, gettingChatByIdError: error } = useChatQuery(chatId);
+  const {data:chat,error}=useQuery(["getChatById",chatId],()=>getChatByIdApi(chatId || ""));
 
-  console.log("chat from chatId",chat);
 
   return (
     <div className="h-full flex">

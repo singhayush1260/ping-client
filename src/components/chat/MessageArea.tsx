@@ -1,19 +1,27 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
+import { useSocketContext } from "@/context/SocketContext";
 import { getAllMessages } from "@/api-client/message-api";
-import { io } from "socket.io-client";
+//import { io } from "socket.io-client";
 import { Message } from "@/types";
 import { TiMessages } from "react-icons/ti";
 import MessageItem from "./MessageItem";
-import { generateDeviderLabel } from "@/lib/utils";
+import { generateDividerLabel } from "@/lib/utils";
 
-const API_URL = import.meta.env.VITE_API_BASE_URL;
-export let socket: any;
+
+//const API_URL = import.meta.env.VITE_API_BASE_URL;
+//export let socket: any;
 
 interface MessageAreaProps {
   chatId: string;
 }
 const MessageArea = ({ chatId }: MessageAreaProps) => {
+
+  // @ts-ignore
+  const{socket}=useSocketContext();
+
+  console.log("socket from message area",socket) 
+
   const [messages, setMessages] = useState<Message[]>([]);
 
   const latestMessageRef = useRef<HTMLDivElement>(null);
@@ -37,13 +45,15 @@ const MessageArea = ({ chatId }: MessageAreaProps) => {
   );
 
   useEffect(() => {
-    socket = io(API_URL);
-    socket.emit("join room", chatId);
+    //socket = io(API_URL);
+    //socket.emit("mark online",currentUser?._id);
+    socket?.emit("join room", chatId);
     refetch();
   }, [chatId]);
 
   useEffect(() => {
-    socket.on("message", (data: any) => {
+    socket?.on("message", (data: any) => {
+      console.log("message event inside useEffect",data)
       const isMessageExists = messages.some(
         (message) => message._id === data._id
       );
@@ -52,7 +62,7 @@ const MessageArea = ({ chatId }: MessageAreaProps) => {
       }
     });
     return () => {
-      socket.off("message");
+      socket?.off("message");
     };
   }, [messages]);
 
@@ -75,7 +85,7 @@ const MessageArea = ({ chatId }: MessageAreaProps) => {
       </div>
     );
   }
-  let deviderLabel:string=generateDeviderLabel(new Date(messages[0]?.createdAt));
+  let deviderLabel:string=generateDividerLabel(new Date(messages[0]?.createdAt));
   let currentDeviderLabel:string;
   let devider:any;
   return (
@@ -88,7 +98,7 @@ const MessageArea = ({ chatId }: MessageAreaProps) => {
               </div>
           }
          else{
-          currentDeviderLabel=generateDeviderLabel(new Date(message.createdAt));
+          currentDeviderLabel=generateDividerLabel(new Date(message.createdAt));
           if(currentDeviderLabel===deviderLabel){
             devider=null;
           }

@@ -4,16 +4,17 @@ import { validateToken } from "@/api-client/auth-api";
 
 interface IAuthContext{
   isLoggedIn: boolean;
+  currentUserId:string;
 };
 
 
 const AuthContext = createContext<IAuthContext | undefined>(undefined);
 
 export const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
-  const { isError } = useQuery("validateToken", validateToken, { retry: false });
-
+  const { data, isError } = useQuery("validateToken", validateToken, { retry: false });
   const contextValue: IAuthContext = {
     isLoggedIn: !isError,
+    currentUserId:data?.userId 
   };
 
   return (

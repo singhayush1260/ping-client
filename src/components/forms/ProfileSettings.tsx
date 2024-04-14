@@ -40,12 +40,8 @@ const ProfileSettings = () => {
   });
 
   const { mutate, isLoading, error,isSuccess } = useMutation(updateUser, {
-    onSuccess: async (updatedUser) => {
-      console.log("updated user", updatedUser);
+    onSuccess: async () => {
       await queryClient.invalidateQueries("getCurrentUser");
-    },
-    onError: () => {
-      console.log("Error updating user");
     },
   });
 
@@ -53,16 +49,12 @@ const ProfileSettings = () => {
   const about=watch("about");
 
   const removeProfilePicture=useCallback(()=>{
-    console.log("rm pp");
     const formData = new FormData();
     formData.append("removeProfilePicture",JSON.stringify(true));
     mutate(formData);
-    console.log("pp rmvd");
   },[mutate]);
 
   const onSubmit=useCallback((data:FieldValues)=>{
-    const a=4/0;
-    console.log("onSubmit data",data,a);
       const formData = new FormData();
         if (profilePicture?.file) {
           formData.append("profilePicture", profilePicture.file);
@@ -73,13 +65,9 @@ const ProfileSettings = () => {
         if(data?.about?.length>0){
           formData.append("about", data.about);
         }
-        console.log("name",formData.get("name"));
-        console.log("about",formData.get("about"));
         mutate(formData);
     
   },[profilePicture,name,about,mutate]);
-
-  console.log("error from profle setting",error)
 
   return (
     <form

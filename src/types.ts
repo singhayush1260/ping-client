@@ -10,6 +10,7 @@ export interface User extends Document {
     name: string;
     center: number[]; // Array of [longitude, latitude]
   };
+  isOnline:string;
   connections?: User[];
   chats?: Chat[];
   createdAt: any;

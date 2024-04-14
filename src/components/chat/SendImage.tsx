@@ -12,7 +12,8 @@ import { useForm } from "react-hook-form";
 import { sendImage } from "@/api-client/message-api";
 import IMAGE_FALLBACK from "@/assets/image_fallback.png";
 import LoaderButton from "../miscellaneous/LoaderButton";
-import { socket } from "./MessageArea";
+//import { socket } from "./MessageArea";
+import { useSocketContext } from "@/context/SocketContext";
 interface SendImageProps {
   trigger: React.ReactNode;
   chatId?: string;
@@ -21,6 +22,8 @@ interface SendImageProps {
 
 const SendImage = ({ trigger, chatId = "", onSent }: SendImageProps) => {
 
+   // @ts-ignore
+   const{socket}=useSocketContext();
 
   const [image, setImage] = useState<ImageType>({
     file: null,
@@ -35,7 +38,7 @@ const SendImage = ({ trigger, chatId = "", onSent }: SendImageProps) => {
     onSuccess: async (sentImage) => {
       await onSent();
       setOpenModal(!openModal);
-      socket.emit("new message",sentImage);
+      socket?.emit("new message",sentImage);
     },
   });
 

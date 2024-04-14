@@ -5,8 +5,6 @@ import { useQuery } from 'react-query';
 const useCurrentUser = () => {
   
   const{data,isLoading,isError}=useQuery("getCurrentUser",getCurrentUser);
-    
-   //console.log("current user from useCrrentUser",data);
  
    const currentUser:User=data;
 

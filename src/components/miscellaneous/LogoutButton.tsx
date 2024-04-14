@@ -18,12 +18,10 @@ const LogoutButton = ({ children }: { children: React.ReactNode }) => {
         title: "Error logging out",
         description: "Something went wrong!",
       });
-      console.log("Error loggin out");
     },
   });
 
   const handleClick = () => {
-    console.log("logout button clicked")
     mutate();
   };
 

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useCallback, useMemo } from "react";
-import { cn, generateDeviderLabel } from "@/lib/utils";
+import { cn, generateDividerLabel } from "@/lib/utils";
 import { Chat } from "@/types";
 import UserAvatar from "@/components/miscellaneous/UserAvatar";
 
@@ -11,8 +11,6 @@ interface ChatListItemProps{
 
 const ChatListItem = ({ chat,currentlyOpened }: ChatListItemProps) => {
   const navigate = useNavigate();
-
-  //console.log("last message",chat.lastMessage);
 
   const handleClick = useCallback(async () => {
     navigate(`/chat/${chat._id}`);
@@ -28,7 +26,7 @@ const ChatListItem = ({ chat,currentlyOpened }: ChatListItemProps) => {
       if (chat?.lastMessage?.body.length <= 10) {
         return chat?.lastMessage?.body;
       }
-      return `${chat?.lastMessage?.body.substring(0, 8)}...`;
+      return `${chat?.lastMessage?.body.substring(0, 8)}`;
     }
     return null;
   }, [chat]);
@@ -39,7 +37,7 @@ const ChatListItem = ({ chat,currentlyOpened }: ChatListItemProps) => {
       // return formatDistanceToNow(new Date(chat.lastMessage.createdAt), {
       //   addSuffix: true,
       // });
-      return generateDeviderLabel(new Date(chat.lastMessage.createdAt))
+      return generateDividerLabel(new Date(chat.lastMessage.createdAt))
     }
     return "";
   }, [chat]);

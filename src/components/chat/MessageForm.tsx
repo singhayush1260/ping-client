@@ -18,7 +18,8 @@ import {
 import SendImage from "./SendImage";
 import { sendMessage } from "@/api-client/message-api";
 import { useTheme } from "../theme/ThemeProvider";
-import { socket } from "./MessageArea";
+//import { socket } from "./MessageArea";
+import { useSocketContext } from "@/context/SocketContext";
 
 interface MessageFormProps {
   chatId: string;
@@ -26,6 +27,8 @@ interface MessageFormProps {
 
 const MessageForm = ({ chatId }: MessageFormProps) => {
   const { theme } = useTheme();
+   // @ts-ignore
+   const{socket}=useSocketContext();
 
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
 
@@ -42,10 +45,9 @@ const MessageForm = ({ chatId }: MessageFormProps) => {
 
   const { mutate, isLoading } = useMutation(sendMessage, {
     onSuccess: async (data) => {
-      console.log("data on success", data);
       await queryClient.invalidateQueries("getAllMessages");
       await queryClient.invalidateQueries("getAllChats");
-      socket.emit("new message", data);
+      socket?.emit("new message", data);
     },
   });
 

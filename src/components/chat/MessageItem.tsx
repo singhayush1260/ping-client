@@ -1,12 +1,13 @@
 import { IoCheckmark, IoCheckmarkDoneOutline } from "react-icons/io5";
 import { format } from "date-fns";
-import { socket } from "./MessageArea";
+//import { socket } from "./MessageArea";
 import { useEffect, useMemo, useState } from "react";
 import { useMutation } from "react-query";
 import { markAsSeen } from "@/api-client/message-api";
 import useCurrentUser from "@/hooks/useCurrentUser";
 import { cn } from "@/lib/utils";
 import { Message } from "@/types";
+import { useSocketContext } from "@/context/SocketContext";
 
 
 interface MessageItemProps {
@@ -18,6 +19,8 @@ interface MessageItemProps {
 const MessageItem = ({ message,previousMessage }: MessageItemProps) => {
   const { currentUser } = useCurrentUser();
   const [seenIds, setSeenIds] = useState(message?.seenIds);
+   // @ts-ignore
+   const{socket}=useSocketContext();
   // console.log("previous messgae from message item", previousMessage);
   // console.log("messgae from message item", message);
   const sender = message.sender;
@@ -28,7 +31,7 @@ const MessageItem = ({ message,previousMessage }: MessageItemProps) => {
 
   const { mutate } = useMutation(markAsSeen, {
     onSuccess: (message) => {
-      socket.emit("mark as seen",message)
+      socket?.emit("mark as seen",message)
     },
   });
 

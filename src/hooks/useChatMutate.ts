@@ -19,7 +19,6 @@ const useChatMutate = <Action extends ActionType>({
   onError,
 }: UseChatMutate<Action>) => {
   const createChat =  (userId: string) => {
-    console.log("userId from create chat hook",userId)
     const formData=new FormData();
     formData.append("name","sender");
     formData.append("isGroup","false");
@@ -27,7 +26,6 @@ const useChatMutate = <Action extends ActionType>({
     return formData;
   };
   const createGroupChat = (data:any) => {
-    console.log("create group from create chat hook",data)
     const formData=new FormData();
     formData.append("name",data?.name);
     formData.append("thumbnail",data?.thumbnail!);
@@ -38,11 +36,9 @@ const useChatMutate = <Action extends ActionType>({
    return formData;
   };
   const deleteChat = (chatId: string) => {
-    console.log("chat id from delete chat",chatId)
     return chatId;
   };
   const leaveGroup = (chatId: string) => {
-    console.log("chat id from leave group",chatId)
     return chatId;
   };
   let apiFunction:any;

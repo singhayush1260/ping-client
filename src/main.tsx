@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import { BrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { AuthContextProvider } from "./context/AuthContext.tsx";
+import { SocketContextProvider } from "./context/SocketContext.tsx";
 import { Toaster } from "@/components/ui/toaster";
 import { SidebarContextProvider } from "./context/SidebarContext.tsx";
 import ErrorBoundary from "./components/error-boundary/ErrorBoundary.tsx";
@@ -24,9 +25,11 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
       <QueryClientProvider client={queryClient}>
         <ThemeProvider>
           <AuthContextProvider>
+            <SocketContextProvider>
             <SidebarContextProvider>
             <App />
             </SidebarContextProvider>
+            </SocketContextProvider>
             <Toaster />
           </AuthContextProvider>
         </ThemeProvider>

@@ -1,17 +1,12 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
-import useConnectionMutation from "@/hooks/useConnectionMutation";
 import { getConnectionRequests } from "@/api-client/con-req-api";
-import formatDistanceToNow from "date-fns/formatDistanceToNow";
-import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../ui/tabs";
-import UserAvatar from "@/components/miscellaneous/UserAvatar";
 import UserListSkeleton from "@/components/miscellaneous/UserListSkeleton";
 import Modal from "./Modal";
 import { FaUserFriends } from "react-icons/fa";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import ConnectionRequestItem from "./ConnectionRequestItem";
 
 
 interface ConnectionRequestProps {
@@ -27,14 +22,6 @@ const ConnectionRequest = ({ trigger }: ConnectionRequestProps) => {
     enabled: true
   });
 
-
-  const { performAction: acceptRequest, loading: accepting, success: accepted } = useConnectionMutation({
-    action: "accept",
-  });
-
-  const { performAction: declineRequest, loading: declining, success: declined } = useConnectionMutation({
-    action: "decline",
-  });
 
   let body: JSX.Element[] | JSX.Element = [];
 
@@ -58,51 +45,10 @@ const ConnectionRequest = ({ trigger }: ConnectionRequestProps) => {
     );
   } else {
     body = (
-      <ScrollArea className="flex-grow max-h-[300px] overflow-y-auto">
+      <ScrollArea className="flex-grow max-h-[300px] overflow-y-auto space-y-1">
         {data?.connectionRequests?.map((conReq: any) => {
           return (
-            <div
-              key={conReq?._id}
-              className="flex items-center justify-between py-2 px-3 border-b shadow-sm rounded-sm hover:bg-zinc-50 hover:cursor-pointer"
-            >
-              <div className="flex gap-5">
-                <UserAvatar imageUrl={requestType === "sent" ? conReq?.receiver?.profilePicture : conReq?.sender?.profilePicture} />
-                <div className="flex flex-col">
-                  <h5>{requestType === "sent" ? conReq?.receiver?.name : conReq?.sender?.name}</h5>
-                  <small className="text-sm font-light text-gray-700">
-                    {/* @ts-ignore */}
-                    {formatDistanceToNow(new Date(conReq?.createdAt), { addSuffix: true })}
-                  </small>
-                 { !accepting && !declining && !accepted && <small className={cn(conReq?.status === "accepted" ? "text-green-400" : "text-red-500")}>{conReq?.status}</small>}
-                  {accepting && !declining && <small className="font-semibold text-blue-700">Accepting...</small>}
-                  {accepted && <small className="font-semibold text-green-400">Accepted</small>}
-                  {declining && !accepting && !declined && <small className="font-semibold text-blue-700">Declining...</small>}
-                  {declined && <small className="font-semibold text-red-400">Declined</small>}
-                </div>
-              </div>
-
-              {
-                conReq.status === "Pending" && requestType === "received" && <DropdownMenu>
-                  <DropdownMenuTrigger>
-                    <BsThreeDotsVertical />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent className="flex flex-col gap-2 mr-[100px]">
-                    <DropdownMenuItem
-                      
-                      onClick={() => acceptRequest(conReq)}
-                    >
-                      Accept
-                    </DropdownMenuItem>
-                    <DropdownMenuItem
-                      
-                      onClick={() => declineRequest(conReq)}
-                    >
-                      Decline
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              }
-            </div>
+            <ConnectionRequestItem key={conReq._id} requestType={requestType} connectionRequest={conReq}/>
           );
         })}
       </ScrollArea>

@@ -17,17 +17,9 @@ const SecuritySettings=()=>{
     }
   });
 
-  const {mutate,isLoading,error,isSuccess}=useMutation(changePassword,{
-    onSuccess:(response)=>{
-      console.log(response)
-    },
-    onError:(error)=>{
-         console.log("error",error);
-    }
-  });
+  const {mutate,isLoading,error,isSuccess}=useMutation(changePassword);
 
   const onSubmit=(data:{currentPassword:string,newPassword:string})=>{
-   console.log("data from change password",data);
    mutate(data);
   }
 

@@ -25,12 +25,8 @@ const UserLocation = () => {
   updatedUserWithLocation.location = location;
 
   const { mutate, isLoading, error, isSuccess } = useMutation(updateUser, {
-    onSuccess: async (updatedUser) => {
-      console.log("updated user after location update", updatedUser);
+    onSuccess: async () => {
       await queryClient.invalidateQueries("getCurrentUser");
-    },
-    onError: () => {
-      console.log("error updating location");
     },
   });
 

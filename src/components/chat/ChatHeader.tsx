@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import { Chat } from "@/types";
+import { Chat, User } from "@/types";
 import MobileDrawer from "@/components/miscellaneous/MobileDrawer";
 import SideDrawer from "@/components/miscellaneous//SideDrawer";
 import ChatInfo from "./ChatInfo";
 import GroupInfo from "./GroupInfo";
 import UserAvatar from "@/components/miscellaneous//UserAvatar";
+import { formatDistanceToNow } from "date-fns";
 
 interface ChatHeaderProps {
   chat: Chat;
@@ -15,6 +16,13 @@ interface ChatHeaderProps {
 const ChatHeader = ({ chat }: ChatHeaderProps) => {
 
 const navigate = useNavigate();
+
+const { users } = chat;
+const otherUser:User=users[0];
+
+const onlineStatus=otherUser.isOnline==="Online" ?  "Online" :"last seen "+formatDistanceToNow(new Date(otherUser.isOnline), {
+    addSuffix: true,
+   });
   
   return (
     <div className="relative h-[10%] md:h-[12%] w-full flex justify-between items-center px-2 md:px-5 pt-2 pb-2 md:py-9 border-b">
@@ -24,13 +32,16 @@ const navigate = useNavigate();
           className="md:hidden text-gray-600"
           onClick={() => navigate("/chats")}
         />
+       <div className="relative">
        <UserAvatar imageUrl={chat.thumbnail || ""}/>
+      {onlineStatus==="Online" && <div className="w-3 h-3 rounded-full bg-green-400 absolute right-0 bottom-0"></div>}
+       </div>
         <div className="flex flex-col ml-3">
           <span className="font-semibold text-gray-700 dark:text-gray-300">
             {chat.name}
           </span>
-          <span className="text-xs md:text-sm font-light text-gray-600 dark:text-gray-300">
-            last seen at 5:54 PM
+          <span className="text-xs md:text-sm font-light text-gray-800 dark:text-gray-300">
+            {onlineStatus}
           </span>
         </div>
       </div>

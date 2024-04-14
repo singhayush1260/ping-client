@@ -6,7 +6,7 @@ import UserMenu from "@/components/miscellaneous/UserMenu";
 import ChatList from "./ChatList";
 import Logo from "@/components/miscellaneous/Logo";
 import UsersTab from "./UsersTab";
-import CallList from "./CallList";
+//import CallList from "./CallList";
 import { PiHandsClappingDuotone } from "react-icons/pi";
 
 export interface SidebarProps {
@@ -54,9 +54,9 @@ const Sidebar = ({ defaultValue }: SidebarProps) => {
             <TabsTrigger value="chats" className="w-full">
               Chats
             </TabsTrigger>
-            <TabsTrigger value="calls" className="w-full">
+            {/* <TabsTrigger value="calls" className="w-full">
               Calls
-            </TabsTrigger>
+            </TabsTrigger> */}
           </TabsList>
           <div className="h-[300px] overflow-y-auto no-scrollbar">
             <TabsContent value="users">
@@ -65,9 +65,9 @@ const Sidebar = ({ defaultValue }: SidebarProps) => {
             <TabsContent value="chats">
               <ChatList />
             </TabsContent>
-            <TabsContent value="calls">
+            {/* <TabsContent value="calls">
               <CallList />
-            </TabsContent>
+            </TabsContent> */}
           </div>
         </Tabs>
       </div>

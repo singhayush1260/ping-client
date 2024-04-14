@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { Button } from "../ui/button";
-import { IoIosCall } from "react-icons/io";
-import { FcVideoCall } from "react-icons/fc";
+//import { IoIosCall } from "react-icons/io";
+//import { FcVideoCall } from "react-icons/fc";
 import Image from "@/components/miscellaneous//Image";
 import { Chat, User } from "@/types";
 import {format} from "date-fns";
@@ -16,7 +16,6 @@ interface ChatInfoProps {
 
 const ChatInfo = ({chat }: ChatInfoProps) => {
  const { users } = chat;
- console.log("chat from caht info",chat)
  const otherUser:User=users[0];
 
  const navigate=useNavigate();
@@ -24,7 +23,6 @@ const ChatInfo = ({chat }: ChatInfoProps) => {
  const { mutateFunction: deleteChatById} = useChatMutate({
   action: "delete",
   onSuccess: () => {
-    console.log("chat deleted success");
     navigate(`/chats`);
   },
 });
@@ -49,12 +47,12 @@ const ChatInfo = ({chat }: ChatInfoProps) => {
        <h4>{otherUser.name}</h4>
        <small> pinging since {joinedDate}</small>
        <div className="flex gap-2"> 
-         <Button variant="outline">
+         {/* <Button variant="outline">
              <IoIosCall className="text-blue-400"/>
          </Button>
          <Button variant="outline">
              <FcVideoCall/>
-         </Button>
+         </Button> */}
        </div>
     </div>
    
@@ -78,7 +76,7 @@ const ChatInfo = ({chat }: ChatInfoProps) => {
           isDistructiveAction
           cancelButtonAction={() => {}}
           continueButtonAction={handleChatDeletion}
-          alertDiscription="This will permanently delete all your group chat data from our servers."
+          alertDiscription="This will permanently delete all your chat data from our servers."
         >
           <Button variant="destructive" className="flex-grow">
             Delete
