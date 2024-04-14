@@ -18,7 +18,6 @@ import {
 import SendImage from "./SendImage";
 import { sendMessage } from "@/api-client/message-api";
 import { useTheme } from "../theme/ThemeProvider";
-//import { socket } from "./MessageArea";
 import { useSocketContext } from "@/context/SocketContext";
 
 interface MessageFormProps {
@@ -97,8 +96,8 @@ const MessageForm = ({ chatId }: MessageFormProps) => {
             disabled={isLoading}
             className="focus:outline-none focus:border-none"
           />
-          <Button variant="secondary">
-            <IoMdSend size={30} className="text-gray-600 cursor-pointer" />
+          <Button variant="secondary" className="border border-blue-600">
+            <IoMdSend size={30} className="text-blue-600 cursor-pointer" />
           </Button>
         </div>
       </form>

@@ -8,6 +8,8 @@ import useCurrentUser from "@/hooks/useCurrentUser";
 import { cn } from "@/lib/utils";
 import { Message } from "@/types";
 import { useSocketContext } from "@/context/SocketContext";
+import Image from "../miscellaneous/Image";
+import IMAGE_FALLBACK from "@/assets/image_fallback.png";
 
 
 interface MessageItemProps {
@@ -21,13 +23,8 @@ const MessageItem = ({ message,previousMessage }: MessageItemProps) => {
   const [seenIds, setSeenIds] = useState(message?.seenIds);
    // @ts-ignore
    const{socket}=useSocketContext();
-  // console.log("previous messgae from message item", previousMessage);
-  // console.log("messgae from message item", message);
   const sender = message.sender;
   const isSent = currentUser?._id === (sender?._id || sender);
-  const classes = isSent
-    ? `bg-blue-600 text-white rounded-md p-1.5 w-[60%] mb-2 ml-auto`
-    : `bg-white text-gray-700 shadow-md rounded-md p-1.5 w-[60%] mb-2 mr-auto`;
 
   const { mutate } = useMutation(markAsSeen, {
     onSuccess: (message) => {
@@ -44,7 +41,7 @@ const MessageItem = ({ message,previousMessage }: MessageItemProps) => {
 
   const sentAt = useMemo(() => {
     if (message?.createdAt) {
-      //@ts-ignore aaaa
+      
       return format(new Date(message?.createdAt), "hh:mm")+" "+format(new Date(message?.createdAt), "a")
       // return formatDistanceToNow(new Date(message?.createdAt), {
       //   addSuffix: true,
@@ -63,25 +60,39 @@ const MessageItem = ({ message,previousMessage }: MessageItemProps) => {
       })
       }
   }, [message]);
-
-  if (message.image) {
-    return (
-        <div className={classes}>
-        <div className="w-[200px] h-[150px] bg-blue-400 shadow-md">
-          <img
+  if(message.image){
+    return(
+      <div className={cn("w-[60%] mb-2", isSent ? "ml-auto":"mr-auto")}>
+      {!isSent && message?.chat?.isGroup && previousMessage.sender?._id!==message.sender?._id && <span className="text-sm font-medium">{message?.sender?.name}</span>}
+      <div className={cn("font-normal flex flex-col  p-1 rounded-md shadow-md ",isSent ? "bg-blue-500 dark:bg-blue-800 dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-sm dark:bg-opacity-30 text-white":"bg-muted  dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-sm dark:bg-opacity-30 text-gray-700 dark:text-white")}>
+      <div className="w-[200px] h-[150px] bg-blue-400 shadow-md">
+          <Image
             src={message.image}
+            fallback={IMAGE_FALLBACK}
             className="block h-full w-full max-w-full max-h-full object-scale-down"
           />
         </div>
-        <div className="font-light">{message.body}</div>
+        <div className="flex justify-between p-1">
+        <p>{message.body}</p>
+        <div className="flex items-center gap-4">
+          <small>{sentAt}</small>
+          {isSent && (
+            <small className="mt-2.5">
+              {" "}
+              {isSeen ? <IoCheckmarkDoneOutline /> : <IoCheckmark />}{" "}
+            </small>
+          )}
+        </div>
+        </div>
       </div>
-    );
+    </div>
+    )
   }
 
   return (
     <div className={cn("w-[60%] mb-2", isSent ? "ml-auto":"mr-auto")}>
-      {!isSent && previousMessage.sender?._id!==message.sender?._id && <span className="text-sm font-medium">{message?.sender?.name}</span>}
-      <div className={cn("font-light flex justify-between p-1 rounded-md ",isSent ? "bg-blue-600 text-white":"bg-white text-gray-700 shadow-md")}>
+      {!isSent && message?.chat?.isGroup && previousMessage.sender?._id!==message.sender?._id && <span className="text-sm font-medium">{message?.sender?.name}</span>}
+      <div className={cn("font-normal flex justify-between p-1 rounded-md shadow-md ",isSent ? "bg-blue-500 dark:bg-blue-800 dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-sm dark:bg-opacity-30 text-white":"bg-muted  dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-sm dark:bg-opacity-30 text-gray-700 dark:text-white")}>
         <p>{message.body}</p>
         <div className="flex items-center gap-4">
           <small>{sentAt}</small>

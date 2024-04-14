@@ -18,7 +18,7 @@ module.exports = {
     },
     extend: {
      backgroundImage: {
-        'messageArea': "url('/src/assets/backgrounds/imageArea.svg')",
+        'messageArea': "url('/src/assets/backgrounds/messageArea.svg')",
         "coloredPattern":"url('/src/assets/backgrounds/coloredPatterns.svg')",
         "worldMap":"url('/src/assets/backgrounds/worldMap.jpg')",
       },

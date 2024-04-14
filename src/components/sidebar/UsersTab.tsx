@@ -8,11 +8,11 @@ const UsersTab = () => {
   return (
     <div className="h-full flex flex-col gap-3 p-2">
       <div>
-        <h5 className="text-sm text-gray-800 font-light mb-1">Show</h5>
+        <h5 className="text-sm text-gray-800 dark:text-white font-light mb-1">Show</h5>
         <ReactSelect
           classNames={{
             control: () => "p-1 border-2",
-            input: () => "text-medium",
+            input: () => "text-medium grey",
             option: () => "text-medium",
           }}
           theme={(theme) => ({
@@ -21,7 +21,7 @@ const UsersTab = () => {
             colors: {
               ...theme.colors,
               primary: "#3559E0",
-              primary25: "#ffe4e6",
+              primary50: "#ffe4e6",
             },
           })}
           value={{ label: filter.filterType, value: filter.filterType }}
@@ -41,7 +41,7 @@ const UsersTab = () => {
           <h5
             className={cn(
               filter.filterType !== "BY COUNTRY" && "cursor-not-allowed",
-              "text-sm text-gray-800 font-light mb-1"
+              "text-sm text-gray-800 dark:text-white font-light mb-1"
             )}
           >
             Search by country

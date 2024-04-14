@@ -53,7 +53,7 @@ const ChatListItem = ({ chat,currentlyOpened }: ChatListItemProps) => {
 
   return (
     <div
-      className={cn("w-full flex items-center gap-4 px-4 py-2.5 border-b cursor-pointer rounded-sm transition-all ease-in",!currentlyOpened && "hover:bg-zinc-100" ,currentlyOpened && "bg-muted dark:bg-blue-700",!currentlyOpened && "hover:dark:bg-blue-500")}
+      className={cn("w-full flex items-center gap-4 px-4 py-2.5 border-b cursor-pointer rounded-sm transition-all ease-in",!currentlyOpened && "hover:bg-muted/20" ,currentlyOpened && "bg-muted ",!currentlyOpened && "hover:bg-muted/20")}
       onClick={handleClick}
     >
       <UserAvatar imageUrl={chat.thumbnail || ""} className="dark:border-blue-400"/>

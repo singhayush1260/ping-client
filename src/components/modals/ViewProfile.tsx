@@ -10,7 +10,6 @@ interface ViewProfileProps {
 
 const ViewProfile = ({ trigger }: ViewProfileProps) => {
   const { currentUser, isLoading, isError } = useCurrentUser();
-   console.log("current user from vp",currentUser);
  let body: JSX.Element[] | JSX.Element = [];
 
   if (currentUser) {

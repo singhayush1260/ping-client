@@ -2,25 +2,17 @@ import { useEffect, useRef, useState } from "react";
 import { useQuery } from "react-query";
 import { useSocketContext } from "@/context/SocketContext";
 import { getAllMessages } from "@/api-client/message-api";
-//import { io } from "socket.io-client";
 import { Message } from "@/types";
 import { TiMessages } from "react-icons/ti";
 import MessageItem from "./MessageItem";
 import { generateDividerLabel } from "@/lib/utils";
 
-
-//const API_URL = import.meta.env.VITE_API_BASE_URL;
-//export let socket: any;
-
 interface MessageAreaProps {
   chatId: string;
 }
 const MessageArea = ({ chatId }: MessageAreaProps) => {
-
   // @ts-ignore
-  const{socket}=useSocketContext();
-
-  console.log("socket from message area",socket) 
+  const { socket } = useSocketContext();
 
   const [messages, setMessages] = useState<Message[]>([]);
 
@@ -53,7 +45,6 @@ const MessageArea = ({ chatId }: MessageAreaProps) => {
 
   useEffect(() => {
     socket?.on("message", (data: any) => {
-      console.log("message event inside useEffect",data)
       const isMessageExists = messages.some(
         (message) => message._id === data._id
       );
@@ -72,7 +63,7 @@ const MessageArea = ({ chatId }: MessageAreaProps) => {
 
   if (messages.length == 0) {
     return (
-      <div className="h-[80.5%] md:h-[74.5%] w-full flex items-center justify-center p-2 overflow-y-auto  light:bg-zinc-50 bg-no-repeat bg-cover bg-center">
+      <div className="h-[80.5%] md:h-[74.5%] w-full flex items-center justify-center p-2 overflow-y-auto  light:bg-zinc-50 bg-messageArea bg-no-repeat bg-cover bg-center">
         <div className="w-full h-full flex items-center justify-center my-[15%]">
           <div className="flex flex-col items-center light:bg-zinc-50 p-2 md:p-5 animate-bounce">
             <TiMessages className="w-7 h-7 md:w-10 md:h-10 text-blue-700" />
@@ -85,54 +76,63 @@ const MessageArea = ({ chatId }: MessageAreaProps) => {
       </div>
     );
   }
-  let deviderLabel:string=generateDividerLabel(new Date(messages[0]?.createdAt));
-  let currentDeviderLabel:string;
-  let devider:any;
+  let dividerLabel: string = generateDividerLabel(
+    new Date(messages[0]?.createdAt)
+  );
+  let currentDividerLabel: string;
+  let divider: JSX.Element | null;
+
   return (
-    <div className="h-[80.5%] md:h-[74.5%] w-full p-2 overflow-y-auto  light:bg-zinc-50 bg-no-repeat bg-cover bg-center">
+    <div className="h-[80.5%] md:h-[74.5%] w-full p-2 overflow-y-auto  light:bg-zinc-50 bg-messageArea bg-no-repeat bg-cover bg-center">
       {messages.length >= 1 &&
         messages?.map((message: Message, index: number) => {
-          if(index===0){
-           devider= <div className="w-[120px] mx-auto italic text-xs text-gray-800 text-center my-6 px-4 py-0.5 rounded-sm bg-zinc-50">
-                {deviderLabel}
+          if (index === 0) {
+            divider = (
+              <div
+                key={`first-divider-${message?._id}`}
+                className="w-[120px] mx-auto italic text-xs text-gray-800 text-center my-6 px-4 py-0.5 rounded-sm bg-zinc-50 shadow-md"
+              >
+                {dividerLabel}
               </div>
+            );
+          } else {
+            currentDividerLabel = generateDividerLabel(
+              new Date(message.createdAt)
+            );
+            if (currentDividerLabel === dividerLabel) {
+              divider = <span key={`null-divider-${message?._id}`}></span>;
+            } else {
+              dividerLabel = currentDividerLabel;
+              divider = (
+                <div
+                  key={`divider-${message?._id}`}
+                  className="w-[120px] mx-auto italic text-xs text-gray-800 text-center my-6 px-4 py-0.5 rounded-sm bg-zinc-50 shadow-md"
+                >
+                  {currentDividerLabel}
+                </div>
+              );
+              dividerLabel = currentDividerLabel;
+            }
           }
-         else{
-          currentDeviderLabel=generateDividerLabel(new Date(message.createdAt));
-          if(currentDeviderLabel===deviderLabel){
-            devider=null;
-          }
-          else{
-            devider= <div className="w-[120px] mx-auto italic text-xs text-gray-800 text-center my-6 px-4 py-0.5 rounded-sm bg-zinc-50">
-                {deviderLabel}
-              </div>
-              deviderLabel=currentDeviderLabel;
-          }
-         }
-         return (
-          <>
-           {devider}
-            <MessageItem
-              key={message._id}
-              message={message}
-              previousMessage={messages[index !== 0 ? index - 1 : 0]}
-              lastMessage={index === messages.length - 1}
-            />
-          </>
-        );
+          return (
+            <>
+              {divider}
+              <MessageItem
+                key={message._id}
+                message={message}
+                previousMessage={messages[index !== 0 ? index - 1 : 0]}
+                lastMessage={index === messages.length - 1}
+              />
+            </>
+          );
         })}
-       {isLoading && (
-  <div className="w-full h-full flex items-center justify-center">
-   <span className="animate-pulse text-lg">Loading your chats..</span>
- </div>
-)}
+      {isLoading && (
+        <div className="w-full h-full flex items-center justify-center">
+          <span className="animate-pulse text-lg">Loading your chats..</span>
+        </div>
+      )}
       <div ref={latestMessageRef} className="pt-5" />
-    </div> 
+    </div>
   );
 };
 export default MessageArea;
-// {isLoading && (
-//   <div className="w-full h-full flex items-center justify-center">
-//     <span className="animate-pulse text-lg">Loading your chats..</span>
-//   </div>
-// )}

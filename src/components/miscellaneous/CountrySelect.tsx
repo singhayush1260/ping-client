@@ -31,8 +31,8 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ value, onChange,isDisable
         borderRadius: 6,
         colors: {
           ...theme.colors,
-          primary: '#3559E0',
-          primary25: '#ffe4e6'
+          primary: "#3559E0",
+              primary50: "#ffe4e6",
         }
       })}
       isDisabled={isDisabled}

@@ -68,7 +68,9 @@ const Map = ({ currentUser, users }: MapProps) => {
     body = users.map((user) => {
       const customIcon = L.divIcon({
         className: "custom-div-icon",
-        html: `<div class="w-10 h-10 flex justify-center items-center bg-blue-500 rounded-full shadow-md" style="background-image: url('${user.profilePicture}'); background-size: cover;"></div>`,
+        html: `<div class="w-7 h-7 flex justify-center items-center bg-blue-500 rounded-full shadow-md" style="background-image: url('${user.profilePicture}'); background-size: cover;">
+        <div class="w-4 h-4 bg-green-800 rounded-full animate-ping"></div>
+        </div>`,
         iconSize: [30, 30],
         iconAnchor: [15, 30],
         popupAnchor: [0, -30],
