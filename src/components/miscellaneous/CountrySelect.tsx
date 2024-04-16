@@ -1,7 +1,5 @@
 import Select from "react-select";
-
 import useCountries from "@/hooks/useCountries";
-import { cn } from "@/lib/utils";
 
 export type CountrySelectValue = {
   flag: string;
@@ -22,19 +20,13 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ value, onChange,isDisable
   return (
     <div>
       <Select 
-      classNames={{
-        control:()=>"p-2 border-2",
-      }}
-      className={cn(isDisabled && "cursor-not-allowed")}
-      theme={(theme)=>({
-        ...theme,
-        borderRadius: 6,
-        colors: {
-          ...theme.colors,
-          primary: "#3559E0",
-              primary50: "#ffe4e6",
-        }
-      })}
+      styles={{option: (provided, state) => ({
+        ...provided,
+        color: state.isSelected ? 'white' : 'blue',
+        padding: 5,
+      }),}}
+   
+      
       isDisabled={isDisabled}
       placeholder="Anywhere" 
       isClearable 

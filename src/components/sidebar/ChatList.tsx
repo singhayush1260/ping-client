@@ -9,9 +9,7 @@ import { MdOutlineGroupAdd } from "react-icons/md";
 import CreateChat from "../modals/CreateChat";
 import { PiChatsFill } from "react-icons/pi";
 import { BiMessageError } from "react-icons/bi";
-
-
-
+import { Input } from "../ui/input";
 
 const ChatList = () => {
 
@@ -19,6 +17,7 @@ const ChatList = () => {
   const chatId = params?.chatId ? params?.chatId : "";
 
   const {data:chats,isLoading:isLoadingAllChats,error:gettingAllChatsError}=useQuery("getAllChats",getAllChatsApi);
+  
 
   if (chats?.length === 0) {
     return (
@@ -30,7 +29,7 @@ const ChatList = () => {
             Click users to start conversation
           </span>
         </div>
-        <CreateChat trigger={<div className="absolute bottom-10 right-6 bg-blue-600 text-white flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-blue-600">
+        <CreateChat trigger={<div className="absolute bottom-10 right-6 bg-primary text-white flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-primary">
           <MdOutlineGroupAdd className="h-5 w-5" />
         </div>}/>
       </div>
@@ -38,6 +37,8 @@ const ChatList = () => {
   }
 
   return (
+   <>
+   <div className="px-2"> <Input className="h-7 mb-2" placeholder="Search Chat..."/></div>
     <div className="h-full flex flex-col overflow-y-auto">
       {gettingAllChatsError && (
         <div className="flex flex-col items-center mt-16">
@@ -59,10 +60,11 @@ const ChatList = () => {
         chats?.map((chat: Chat) => {
           return <ChatListItem key={chat._id} chat={chat} currentlyOpened={chat._id===chatId} />;
         })}
-      <CreateChat trigger={<div className="absolute bottom-10 right-6 bg-blue-600 text-white flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-blue-600">
+      <CreateChat trigger={<div className="absolute bottom-10 right-6 bg-primary text-white flex items-center justify-center w-10 h-10 rounded-full cursor-pointer hover:bg-primary">
           <MdOutlineGroupAdd className="h-5 w-5" />
         </div>}/>
     </div>
+   </>
   );
 };
 export default ChatList;

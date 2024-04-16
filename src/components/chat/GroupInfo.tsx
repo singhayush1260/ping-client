@@ -357,7 +357,7 @@ const GroupInfo = ({ chat }: GroupInfoProps) => {
                   return (
                     <div
                       key={member._id}
-                      className="flex items-center justify-between mb-2 p-2 cursor-pointer rounded-sm hover:bg-gray-50 hover:dark:bg-blue-300"
+                      className="flex items-center justify-between mb-2 p-2 cursor-pointer rounded-sm hover:bg-gray-50 hover:bg-muted"
                     >
                       <div className="flex items-center gap-2">
                         <UserAvatar imageUrl={member?.profilePicture} fallback={member.name} />

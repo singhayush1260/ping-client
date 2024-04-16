@@ -71,14 +71,14 @@ const MessageForm = ({ chatId }: MessageFormProps) => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="flex items-center gap-2 py-2">
-          <SendImage chatId={chatId} trigger={ <CiImageOn className="h-8 w-8 text-blue-600 cursor-pointer" />} onSent={onImageSent}/>
+          <SendImage chatId={chatId} trigger={ <CiImageOn className="h-8 w-8 text-primary cursor-pointer" />} onSent={onImageSent}/>
           <Popover
             open={showEmojiPicker}
             onOpenChange={() => setShowEmojiPicker(!showEmojiPicker)}
           >
             <PopoverTrigger>
               <BsEmojiSmile
-                className="h-5 w-5 text-blue-600 cursor-pointer"
+                className="h-5 w-5 text-primary cursor-pointer"
                
               />
             </PopoverTrigger>
@@ -96,8 +96,8 @@ const MessageForm = ({ chatId }: MessageFormProps) => {
             disabled={isLoading}
             className="focus:outline-none focus:border-none"
           />
-          <Button variant="secondary" className="border border-blue-600">
-            <IoMdSend size={30} className="text-blue-600 cursor-pointer" />
+          <Button variant="secondary" className="border border-primary">
+            <IoMdSend size={30} className="text-primary cursor-pointer" />
           </Button>
         </div>
       </form>

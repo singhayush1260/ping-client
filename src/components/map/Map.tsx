@@ -100,12 +100,12 @@ const Map = ({ currentUser, users }: MapProps) => {
     <MapContainer
       key={currentUser?.location?.center ? `${currentUser?.location?.center[0]}_${currentUser?.location?.center}` : "default"}
       center={currentUserCenter}
-      zoom={2}
+      zoom={3}
       scrollWheelZoom={false}
       zoomControl={false} // Disable default zoom control
       className="h-full rounded-lg"
     >
-      <TileLayer url={url} attribution={attribution} /> 
+      <TileLayer url={url} attribution={attribution} className="dark:mapDarkTheme"/> 
       {/* @ts-ignore */}
       <ZoomControl position={zoomControlOptions.position} />
       {body}

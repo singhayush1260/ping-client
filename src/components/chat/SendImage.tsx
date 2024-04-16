@@ -99,9 +99,10 @@ const SendImage = ({ trigger, chatId = "", onSent }: SendImageProps) => {
             disabled={isLoading}
           />
           <LoaderButton
+          
           variant="secondary"
             label={
-              <IoMdSend size={30} className="text-gray-600 cursor-pointer" />
+              <IoMdSend size={30} className="text-primary cursor-pointer" />
             }
             isLoading={isLoading}
             loadingLabel="Sending"

@@ -40,6 +40,13 @@ html,body,:root{
 
 }
 
+@variants select(.leaflet-layer, .leaflet-control-zoom-in, .leaflet-control-zoom-out, .leaflet-control-attribution) {
+  .mapDarkTheme {
+    filter: invert(100%) hue-rotate(180deg) brightness(95%) contrast(90%);
+  }
+}
+
+
 .leaflet-bottom,.leaflet-control,.leaflet-pane,.leaflet-top{
   z-index:0 !important;
 }

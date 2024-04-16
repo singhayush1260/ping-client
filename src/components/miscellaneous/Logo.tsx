@@ -8,7 +8,7 @@ interface LogoProps {
 const Logo = ({ title, icon, link }: LogoProps) => {
   return (
     <Link to={link || "/"}>
-      <h1 className="text-blue-700 font-bold flex items-center gap-1">
+      <h1 className="text-primary font-bold flex items-center gap-1">
         {icon && <span>{icon}</span>}
         {title}
       </h1>

@@ -92,20 +92,11 @@ interface CreateGroupProps{
             <Label>Members</Label>
             <ReactSelect 
             isDisabled={creatingChat}
-             classNames={{
-              control:()=>"border-2",
-              input:()=>"text-lg",
-              option:()=>"text-lg"
-            }}
-            theme={(theme)=>({
-              ...theme,
-              borderRadius: 6,
-              colors: {
-                ...theme.colors,
-                primary: 'black',
-                primary25: '#ffe4e6'
-              }
-            })}
+            styles={{option: (provided, state) => ({
+              ...provided,
+              color: state.isSelected ? 'white' : 'blue',
+              padding: 5,
+            })}}
             options={usersList}
             isMulti 
             onChange={(value)=>setValue("members",value)}

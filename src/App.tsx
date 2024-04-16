@@ -1,17 +1,15 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { lazy, Suspense} from "react";
 import { useAuthContext } from "./context/AuthContext";
 import FallbackPage from "@/pages/FallbackPage";
 
-//const Home = lazy(() => import("@/pages/Home"));
 const Login = lazy(() => import("@/pages/Login"));
 const Signup = lazy(() => import("@/pages/Signup"));
 const Chat= lazy(() => import("@/pages/Chat"));
 const Chats= lazy(() => import("@/pages/Chats"));
 const App = () => {
 
-  const { isLoggedIn } = useAuthContext();
-
+const { isLoggedIn} = useAuthContext();
   return (
     <div className="h-screen">
       <Suspense fallback={<FallbackPage />}>

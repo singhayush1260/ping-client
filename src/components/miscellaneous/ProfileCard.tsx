@@ -55,10 +55,10 @@ const ProfileCard = ({
       <div className="space-y-2 text-center">
         <h2 className="text-lg">{name}</h2>
         {email && (
-          <div className="text-gray-700 text-sm font-light">{email}</div>
+          <div className="text-gray-700 text-sm font-light dark:text-gray-400">{email}</div>
         )}
          {about && (
-          <div className="text-black italic text-sm font-normal">{about}</div>
+          <div className="text-black italic text-sm font-normal dark:text-gray-200">{about}</div>
         )}
         {formattedJoinedDate && (
           <div className="text-sm font-medium">
@@ -66,7 +66,7 @@ const ProfileCard = ({
           </div>
         )}
         {
-          connections?.length >0 && <div className="text-xs p-0.5 bg-zinc-50 rounded-md">
+          connections?.length >0 && <div className="text-xs p-0.5 bg-zinc-50 rounded-md dark:bg-muted">
            {connections.length} connections
         </div>
         }

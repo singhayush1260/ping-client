@@ -20,21 +20,21 @@ const UserMenu = ({imageUrl,name}:UserMenuProps) => {
       </PopoverTrigger>
       <PopoverContent className="w-[110px] space-y-1 px-2 mr-10">
         <div className="font-semibold border-b px-2">Account</div>
-        <div className="text-sm font-light text-gray-600 p-0.5 rounded-sm cursor-pointer transition-colors hover:bg-zinc-100 dark:text-gray-300 hover:dark:text-black">
+        <div className="text-sm font-light text-gray-600 p-0.5 rounded-sm cursor-pointer transition-colors hover:bg-muted dark:text-gray-300 ">
           <ViewProfile/>
         </div>
-        <div className="text-sm font-light text-gray-600 p-0.5 rounded-sm cursor-pointer transition-colors hover:bg-zinc-100 dark:text-gray-300 hover:dark:text-black">
+        <div className="text-sm font-light text-gray-600 p-0.5 rounded-sm cursor-pointer transition-colors hover:bg-muted dark:text-gray-300 ">
           <ConnectionRequest/>
         </div>
-        <div className="text-sm font-light text-gray-600 p-0.5 rounded-sm cursor-pointer transition-colors hover:bg-zinc-100 dark:text-gray-300 hover:dark:text-black">
+        <div className="text-sm font-light text-gray-600 p-0.5 rounded-sm cursor-pointer transition-colors hover:bg-muted dark:text-gray-300 ">
           <Settings/>
         </div>
-        <div className="text-sm font-light text-gray-600 p-0.5 rounded-sm cursor-pointer transition-colors hover:bg-zinc-100 dark:text-gray-300 hover:dark:text-black">
+        <div className="text-sm font-light text-gray-600 p-0.5 rounded-sm cursor-pointer transition-colors hover:bg-muted dark:text-gray-300 ">
          <LogoutButton>
           <span>Logout</span>
          </LogoutButton>
         </div>
-        <div className=" p-0.5 rounded-sm cursor-pointer transition-colors hover:bg-zinc-100 dark:text-gray-300 hover:dark:text-black">
+        <div className=" p-0.5 rounded-sm cursor-pointer transition-colors hover:bg-muted dark:text-gray-300 ">
           <ThemeToggle/>
         </div>
       </PopoverContent>

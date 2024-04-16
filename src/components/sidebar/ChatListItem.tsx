@@ -3,6 +3,7 @@ import { useCallback, useMemo } from "react";
 import { cn, generateDividerLabel } from "@/lib/utils";
 import { Chat } from "@/types";
 import UserAvatar from "@/components/miscellaneous/UserAvatar";
+import useCurrentUser from "@/hooks/useCurrentUser";
 
 interface ChatListItemProps{
   chat:Chat;
@@ -10,45 +11,50 @@ interface ChatListItemProps{
 }
 
 const ChatListItem = ({ chat,currentlyOpened }: ChatListItemProps) => {
+
+  const{currentUser}=useCurrentUser();
+
   const navigate = useNavigate();
 
   const handleClick = useCallback(async () => {
     navigate(`/chat/${chat._id}`);
   }, [chat, navigate]);
 
-  const seen = !false;
-
   const lastMessage = useMemo(() => {
-    if(chat?.lastMessage?.image){
+    const lastMessage=chat.messages[chat.messages.length-1];
+    if(lastMessage?.image){
       return "Sent an image"
     }
-    if (chat?.lastMessage?.body) {
-      if (chat?.lastMessage?.body.length <= 10) {
-        return chat?.lastMessage?.body;
+    if (lastMessage?.body) {
+      if (lastMessage?.body.length <= 10) {
+        return lastMessage?.body;
       }
-      return `${chat?.lastMessage?.body.substring(0, 8)}`;
+      return `${lastMessage?.body.substring(0, 10)}`;
     }
     return null;
   }, [chat]);
 
   const lastMessageAt = useMemo(() => {
-    if (chat?.lastMessage?.createdAt) {
-      //@ts-ignore
-      // return formatDistanceToNow(new Date(chat.lastMessage.createdAt), {
-      //   addSuffix: true,
-      // });
-      return generateDividerLabel(new Date(chat.lastMessage.createdAt))
+    const lastMessage=chat.messages[chat.messages.length-1];
+    if (lastMessage?.createdAt) {
+      return generateDividerLabel(new Date(lastMessage.createdAt))
     }
     return "";
   }, [chat]);
 
-  // const isSeen = useMemo(() => {
-  //   const lastMessage=chat?.lastMessage;
-  //   if (chat?.isGroup) {
-  //     return lastMessage?.chat?.users?.length === lastMessage?.seenIds?.length;
-  //   }
-  //   return lastMessage?.seenIds?.length === 2;
-  // }, [chat]);
+
+  const unreadMessages=useMemo(()=>{
+    const messages=chat.messages;
+    return messages.filter(({seenIds})=>{
+      return !seenIds.includes(currentUser?._id)
+    });
+    
+  },[chat.messages]);
+
+  const isSeen = useMemo(() => {
+    const lastMessage=chat.messages[chat.messages.length-1];
+    return unreadMessages.includes(lastMessage);
+  }, [chat.messages]);
 
 
   return (
@@ -58,14 +64,15 @@ const ChatListItem = ({ chat,currentlyOpened }: ChatListItemProps) => {
     >
       <UserAvatar imageUrl={chat.thumbnail || ""} className="dark:border-blue-400"/>
       <div className="w-full flex flex-col">
-        <div className="text-gray-800 font-semibold dark:text-gray-300">
+        <div className="flex items-center gap-2 text-gray-800 font-semibold dark:text-gray-300">
           {chat?.name}
+         {unreadMessages.length >0 && <p className="w-5 h-5  text-center bg-primary/20 p-0.5 rounded-full text-xs">{unreadMessages?.length}</p>}
         </div>
         <div className="w-full flex items-center justify-between">
           <span
             className={cn(
               "text-sm dark:text-gray-300",
-              seen
+              !isSeen
                 ? "text-gray-700"
                 : "font-semibold text-blue-700  px-[4px] py-[2px]"
             )}

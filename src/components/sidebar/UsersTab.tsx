@@ -10,20 +10,11 @@ const UsersTab = () => {
       <div>
         <h5 className="text-sm text-gray-800 dark:text-white font-light mb-1">Show</h5>
         <ReactSelect
-          classNames={{
-            control: () => "p-1 border-2",
-            input: () => "text-medium grey",
-            option: () => "text-medium",
-          }}
-          theme={(theme) => ({
-            ...theme,
-            borderRadius: 6,
-            colors: {
-              ...theme.colors,
-              primary: "#3559E0",
-              primary50: "#ffe4e6",
-            },
-          })}
+        styles={{option: (provided, state) => ({
+          ...provided,
+          color: state.isSelected ? 'white' : 'blue',
+          padding: 5,
+        }),}}
           value={{ label: filter.filterType, value: filter.filterType }}
           options={[
             { label: "ALL USERS", value: "ALL USERS" },

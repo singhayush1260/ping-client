@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useQuery } from "react-query";
+import { useQuery,useQueryClient } from "react-query";
 import { useSocketContext } from "@/context/SocketContext";
 import { getAllMessages } from "@/api-client/message-api";
 import { Message } from "@/types";
@@ -11,8 +11,10 @@ interface MessageAreaProps {
   chatId: string;
 }
 const MessageArea = ({ chatId }: MessageAreaProps) => {
-  // @ts-ignore
+  
   const { socket } = useSocketContext();
+
+  const queryClient=useQueryClient();
 
   const [messages, setMessages] = useState<Message[]>([]);
 
@@ -59,6 +61,7 @@ const MessageArea = ({ chatId }: MessageAreaProps) => {
 
   useEffect(() => {
     scrollToBottom();
+    queryClient.invalidateQueries("getAllChats");
   }, [messages]);
 
   if (messages.length == 0) {
@@ -90,7 +93,7 @@ const MessageArea = ({ chatId }: MessageAreaProps) => {
             divider = (
               <div
                 key={`first-divider-${message?._id}`}
-                className="w-[120px] mx-auto italic text-xs text-gray-800 text-center my-6 px-4 py-0.5 rounded-sm bg-zinc-50 shadow-md"
+                className="w-[120px] mx-auto italic text-xs text-gray-800 text-center my-6 px-4 py-0.5 rounded-md bg-zinc-50 shadow-md border"
               >
                 {dividerLabel}
               </div>
@@ -106,7 +109,7 @@ const MessageArea = ({ chatId }: MessageAreaProps) => {
               divider = (
                 <div
                   key={`divider-${message?._id}`}
-                  className="w-[120px] mx-auto italic text-xs text-gray-800 text-center my-6 px-4 py-0.5 rounded-sm bg-zinc-50 shadow-md"
+                  className="w-[120px] mx-auto italic text-xs text-gray-800 text-center my-6 px-4 py-0.5 rounded-md bg-zinc-50 shadow-md border"
                 >
                   {currentDividerLabel}
                 </div>

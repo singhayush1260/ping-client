@@ -35,7 +35,7 @@ const ConnectionRequestItem = ({
     action: "decline",
   });
   return (
-    <div className="flex items-center justify-between py-2 px-3 border-b shadow-sm rounded-sm hover:bg-zinc-50 hover:cursor-pointer">
+    <div className="flex items-center justify-between py-2 px-3 border-b shadow-sm rounded-sm hover:bg-muted hover:cursor-pointer">
       <div className="flex gap-5">
         <UserAvatar
           imageUrl={
@@ -50,7 +50,7 @@ const ConnectionRequestItem = ({
               ? connectionRequest?.receiver?.name
               : connectionRequest?.sender?.name}
           </h5>
-          <small className="text-sm font-light text-gray-700">
+          <small className="text-sm font-light text-foreground">
             {/* @ts-ignore */}
             {formatDistanceToNow(new Date(connectionRequest?.createdAt), {
               addSuffix: true,

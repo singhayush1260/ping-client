@@ -21,7 +21,7 @@ import {
           {trigger ? trigger : <span>Open Modal</span>}
         </DialogTrigger>
         <DialogContent className="w-[350px] md:w-[400px] rounded-md min-h-[250px]  flex flex-col">
-          <DialogHeader className=" ">
+          <DialogHeader>
             <DialogTitle className="text-center">{title}</DialogTitle>
           </DialogHeader>
           {/* Apply flex-grow within a flex container */}

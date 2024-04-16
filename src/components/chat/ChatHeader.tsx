@@ -21,22 +21,18 @@ const ChatHeader = ({ chat }: ChatHeaderProps) => {
   const { users } = chat;
   const otherUser: User = users[0];
 
-  // const onlineStatus2=otherUser.isOnline==="Online" ?  "Online" :"last seen "+formatDistanceToNow(new Date(otherUser.isOnline), {
-  //     addSuffix: true,
-  //    });
-
   const onlineStatus=useMemo(()=>{
-
-    return otherUser.isOnline === "Online" ? "Online" : `last seen ${format(new Date(otherUser.isOnline), "hh:mm")} ${format(
+    if(chat?.isGroup){
+      return users.reduce((ac,user,index)=>{
+        return `${ac}${index!==0 ? ",":""} ${user.name}`
+      },"")
+    }
+    const time=otherUser?.isOnline==="Online" ?"": format(new Date(otherUser?.isOnline), "hh:mm")
+    return otherUser.isOnline === "Online" ? "Online" : `last seen ${time.charAt(0)==='0'?time.slice(1):time} ${format(
       new Date(otherUser.isOnline),
       "a"
     )} `
-    // return `${
-    //   otherUser.isOnline === "Online" ? "Online" : "last seen"
-    // } ${format(new Date(otherUser.isOnline), "hh:mm")} ${format(
-    //   new Date(otherUser.isOnline),
-    //   "a"
-    // )}`
+
   },[otherUser.isOnline])
 
   return (
